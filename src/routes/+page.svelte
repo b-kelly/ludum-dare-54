@@ -1,2 +1,18 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import paintings from '$lib/paintings.json';
+	import Canvas from '$lib/Canvas.svelte';
+	import type { Painting } from '$lib';
+
+	let currentPainting: Painting;
+</script>
+
+<select bind:value={currentPainting}>
+	<option />
+	{#each paintings as painting}
+		<option value={painting}>{painting.name}</option>
+	{/each}
+</select>
+
+{#if currentPainting}
+	<Canvas painting={currentPainting} />
+{/if}

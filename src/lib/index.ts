@@ -1,1 +1,7 @@
-// place files you want to import through the `$lib` alias in this folder.
+export interface Painting {
+	id: string;
+	name: string;
+	width: number;
+	height: number;
+	palette: string[];
+}
