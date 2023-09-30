@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { wings } from '$lib/data';
 	import { gameState } from '$lib/gameState';
-
-	let currentPoints = 0; // TODO get from game state
 </script>
 
-<span>Total points: {currentPoints}</span>
+<span>Total points: {$gameState.score}</span>
 
 <h2 class="bm-page-title">Lobby</h2>
 <div class="wing open">
@@ -16,8 +14,8 @@
 
 {#each wings as wing, i}
 	<h2 class="bm-page-title">{wing.name}</h2>
-	<div class="wing" class:open={currentPoints >= wing.unlockReq}>
-		{#if currentPoints >= wing.unlockReq}
+	<div class="wing" class:open={$gameState.score >= wing.unlockReq}>
+		{#if $gameState.score >= wing.unlockReq}
 			{#each $gameState.finishedPaintings as painting}
 				<!-- TODO only show the paintings the user has created already -->
 				{painting}

@@ -6,7 +6,7 @@
 
 	export let painting: Painting;
 
-	const MULT = 10;
+	const MULT = 16;
 
 	const dispatch = createEventDispatcher<{
 		finish: {
@@ -28,7 +28,7 @@
 
 <div class="flex gap-3">
 	<Grid dimensions={painting} multiplier={MULT} class="border border-black">
-		<Canvas {painting} {currentColor} />
+		<Canvas dimensions={painting} multiplier={MULT} {currentColor} />
 	</Grid>
 	<Grid dimensions={painting} multiplier={MULT} disabled>
 		<img

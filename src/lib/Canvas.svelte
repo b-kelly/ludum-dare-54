@@ -2,14 +2,13 @@
 	import type { Painting } from '$lib/data';
 	import { onMount } from 'svelte';
 
-	export let painting: Painting;
+	export let dimensions: { height: number; width: number };
 	export let currentColor: string | undefined;
-
-	const MULT = 10;
+	export let multiplier: number;
 
 	let canvas: HTMLCanvasElement;
-	$: cHeight = painting.height * MULT;
-	$: cWidth = painting.width * MULT;
+	$: cHeight = dimensions.height * multiplier;
+	$: cWidth = dimensions.width * multiplier;
 
 	onMount(() => {
 		const ctx = canvas.getContext('2d');
@@ -29,10 +28,10 @@
 	function fillColor(ctx: CanvasRenderingContext2D, x: number, y: number) {
 		ctx.fillStyle = currentColor ?? 'transparent';
 
-		const clampX = Math.floor(x / MULT) * MULT;
-		const clampY = Math.floor(y / MULT) * MULT;
+		const clampX = Math.floor(x / multiplier) * multiplier;
+		const clampY = Math.floor(y / multiplier) * multiplier;
 
-		ctx.fillRect(clampX, clampY, MULT, MULT);
+		ctx.fillRect(clampX, clampY, multiplier, multiplier);
 	}
 </script>
 
