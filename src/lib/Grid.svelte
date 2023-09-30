@@ -33,7 +33,7 @@
 	});
 
 	function drawGrid(ctx: CanvasRenderingContext2D, height: number, width: number) {
-		ctx.strokeStyle = 'rgb(0, 0, 0)';
+		ctx.strokeStyle = 'rgb(.2, .2, .2)';
 		ctx.lineWidth = 1;
 
 		// draw horizontal lines

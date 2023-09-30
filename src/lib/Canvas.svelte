@@ -27,7 +27,21 @@
 		canvas.width = cWidth * devicePixelRatio;
 		ctx.scale(devicePixelRatio, devicePixelRatio);
 
-		canvas.addEventListener('click', (e) => fillColor(ctx, e.offsetX, e.offsetY));
+		function dragAndDraw(e: MouseEvent) {
+			fillColor(ctx, e.offsetX, e.offsetY);
+		}
+
+		function stopDrawing() {
+			canvas.removeEventListener('mousemove', dragAndDraw);
+			window.removeEventListener('mouseup', stopDrawing);
+		}
+
+		// drag-and-draw painting
+		canvas.addEventListener('mousedown', function(e) {
+			fillColor(ctx, e.offsetX, e.offsetY);
+			canvas.addEventListener('mousemove', dragAndDraw);
+			window.addEventListener('mouseup', stopDrawing);
+		});
 
 		// if we're editing an image, pre-draw it
 		if (initialImage) {
@@ -39,7 +53,13 @@
 		redraw();
 	});
 
-	function fillColor(ctx: CanvasRenderingContext2D, x: number, y: number) {
+	function getColor(ctx: CanvasRenderingContext2D | null, x: number, y: number) {
+
+	}
+
+	function fillColor(ctx: CanvasRenderingContext2D | null, x: number, y: number) {
+		if (!ctx) return;
+
 		ctx.fillStyle = currentColor ?? 'transparent';
 
 		const clampX = Math.floor(x / multiplier) * multiplier;

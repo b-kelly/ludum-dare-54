@@ -23,6 +23,8 @@
 	const MULT = 16;
 
 	let currentColor: string | undefined;
+	let isDrawerOpen: boolean;
+	let drawerLabel = "v";
 
 	$: cHeight = currentPainting.height * MULT;
 	$: cWidth = currentPainting.width * MULT;
@@ -66,16 +68,33 @@
 
 		goto('/view');
 	}
+
+	function eraseCanvas() {
+		//TODO: implement canvas clear
+	}
+
+	function fillEmptyTiles() {
+		//TODO: implement canvas fill (for only empty tiles)
+	}
+
+	function toggleDrawer() {
+		isDrawerOpen = !isDrawerOpen;
+		if (isDrawerOpen){
+			drawerLabel = "^";
+			return;
+		}
+		drawerLabel = "V";
+	}
 </script>
 
 {#if step === 'create'}
 
-<div class="bg-museum-paint bg-cover bg-no-repeat flex flex-row">
+<div class="bg-museum-paint bg-cover bg-no-repeat flex flex-row select-none">
 
 	<div class="p-6 flex flex-col h-screen justify-between">
 		<Grid dimensions={currentPainting} multiplier={MULT} disabled>
 			<img
-				class="full-painting min-w-max"
+				class="half-painting min-w-max"
 				src="/paintings/{currentPainting.id}_full.jpg"
 				alt={currentPainting.name}
 				style:--height={cHeight}
@@ -99,6 +118,7 @@
 		</Grid>
 
 		<div class="absolute mt-1 p-2 ml-2 bg-easel-fore border-b-4 border-b-easel-back">
+			<div>
 			{#each currentPainting.palette as color}
 				<button
 					class="swatch ml-1 rounded-full"
@@ -109,12 +129,22 @@
 			{/each}
 			<button
 				class="swatch leading-none"
-				class:current={'white' === currentColor}
-				on:click={() => (currentColor = 'white')}
+				class:current={'transparent' === currentColor}
+				on:click={() => (currentColor = 'transparent')}
 				style:--color={'white'}
 			>
 				&times;
 			</button>
+			<button
+			class="leading-none h-8 p-2 w-8 bg-slate-500"
+			on:click={toggleDrawer}>{drawerLabel}</button>
+			</div>
+			{#if isDrawerOpen == true}
+				<div class="mt-2 text-sm">
+					<button on:click={() => (fillEmptyTiles)}>Fill empty tiles with selected color</button>
+					<button class="bg-red-500" on:click={() => (eraseCanvas)}>Clear all tiles</button>
+				</div>
+			{/if}
 		</div>
 
 		<button type="button" class="absolute bottom-24 w-36 ml-24 bg-slate-700 text-white" on:click={startScoring}>Submit</button>
@@ -143,11 +173,12 @@
 
 	<div class="pb-12 ml-24 md:ml-0">
 
-		<img src={finishedPainting} alt="finished painting" class="absolute mt-36 sm:mt-16 bg-canvas-bg p-2"/>
+		<div class="absolute mt-36 sm:mt-16 flex flex-col">
+			<img src={finishedPainting} alt="finished painting" class="bg-canvas-bg p-2"/>
+			<div class="bg-yellow-600 text-white p-1 mt-1 w100 text-center">Bugga Lisa - adapted by Bug</div>
 
-		<div class="absolute bottom-24 gap-y-4 flex flex-col ml-12">
-			<button type="button" class="bg-slate-400 text-white" on:click={editPainting}>Edit painting</button>
-			<button type="button" class="bg-slate-700 text-white" on:click={savePainting}>Hang in museum!</button>
+			<button type="button" class="bg-slate-400 text-white mt-24" on:click={editPainting}>Edit painting</button>
+			<button type="button" class="bg-slate-700 text-white mt-4" on:click={savePainting}>Hang in museum!</button>
 		</div>
 
 	</div>
@@ -167,6 +198,11 @@
 
 <style>
 	.full-painting {
+		width: calc(var(--width) * 1px);
+		height: calc(var(--height) * 1px);
+	}
+
+	.half-painting {
 		width: calc(var(--width) * 0.5px);
 		height: calc(var(--height) * 0.5px);
 	}
