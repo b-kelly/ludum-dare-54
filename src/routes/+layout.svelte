@@ -7,6 +7,12 @@
 <slot />
 
 <DebugOnly>
+	<button
+		on:click|preventDefault={() => {
+			localStorage.clear();
+			document.location.reload();
+		}}>Clear data</button
+	>
 	<pre>{JSON.stringify(
 			{
 				...$gameState,
