@@ -28,3 +28,9 @@
 		@apply text-2xl;
 	}
 }
+
+@layer utilities {
+	.pixelated {
+		image-rendering: pixelated;
+	}
+}

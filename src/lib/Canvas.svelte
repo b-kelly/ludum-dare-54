@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { loadImageAsync } from './image';
 
 	export let dimensions: { height: number; width: number };
 	export let currentColor: string | undefined;
@@ -30,11 +31,7 @@
 
 		// if we're editing an image, pre-draw it
 		if (initialImage) {
-			const img = new Image();
-			img.onload = () => {
-				ctx.drawImage(img, 0, 0, cWidth, cHeight);
-			};
-			img.src = initialImage;
+			void loadImageAsync(initialImage, cWidth, cHeight, canvas);
 		}
 	}
 
@@ -48,7 +45,11 @@
 		const clampX = Math.floor(x / multiplier) * multiplier;
 		const clampY = Math.floor(y / multiplier) * multiplier;
 
-		ctx.fillRect(clampX, clampY, multiplier, multiplier);
+		ctx.clearRect(clampX, clampY, multiplier, multiplier);
+
+		if (ctx.fillStyle !== 'transparent') {
+			ctx.fillRect(clampX, clampY, multiplier, multiplier);
+		}
 	}
 </script>
 
