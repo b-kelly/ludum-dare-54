@@ -19,7 +19,7 @@
 			<div class="flex gap-4">
 				{#each wing.paintings as painting}
 					{#if $gameState.finishedPaintings[painting]}
-						<a href="/create/paint?painting={painting}" class="painting">
+						<a href="/view/painting?painting={painting}" class="painting">
 							<img src={$gameState.finishedPaintings[painting].image} alt={painting} />
 						</a>
 					{/if}
