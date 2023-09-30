@@ -61,71 +61,93 @@
 	}
 </script>
 
-<div class="flex flex-col">
+
 
 {#if step === 'create'}
-<div class="flex flex-row">
-	<img class="mr-36 mt-48" src="/sprites/bug.png" alt="bug with paintbrush"/>
-	<div class="flex select-none">
+
+<div class="bg-museum-paint bg-cover bg-no-repeat flex flex-row">
+
+	<div class="p-6 flex flex-col h-screen justify-between">
 		<Grid dimensions={currentPainting} multiplier={MULT} disabled>
 			<img
-				class="full-painting mr-24 -ml-24"
+				class="full-painting min-w-max"
 				src="/paintings/{currentPainting.id}_full.jpg"
 				alt={currentPainting.name}
 				style:--height={cHeight}
 				style:--width={cWidth}
 			/>
 		</Grid>
-		<div class="flex flex-col">
-			<Grid dimensions={currentPainting} multiplier={MULT} class="border border-black self-start">
-				<Canvas
-					bind:this={canvas}
-					initialImage={finishedPainting}
-					dimensions={currentPainting}
-					multiplier={MULT}
-					{currentColor}
-				/>
-			</Grid>
-
-			<div class="my-4 flex gap-2">
-				{#each currentPainting.palette as color}
-					<button
-						class="swatch"
-						class:current={color === currentColor}
-						on:click={() => (currentColor = color)}
-						style:--color={color}
-					/>
-				{/each}
-				<button
-					class="swatch leading-none"
-					class:current={'white' === currentColor}
-					on:click={() => (currentColor = 'white')}
-					style:--color={'white'}
-				>
-					&times;
-				</button>
-			</div>
-		</div>
+		<img src="/sprites/bug.png" class="min-w-max hidden md:block" alt="bug artiste" />
 	</div>
-	<img src="/sprites/column.png" alt="marble column" class="-mt-4" />
+
+	<div class="pb-12">
+
+		<img src="/sprites/easel.png" alt="easel" class="absolute mt-12 z-0"/>
+		<Grid dimensions={currentPainting} multiplier={MULT} class="border border-gray-500 absolute mt-24 ml-12 bg-canvas-bg">
+			<Canvas
+				bind:this={canvas}
+				initialImage={finishedPainting}
+				dimensions={currentPainting}
+				multiplier={MULT}
+				{currentColor}
+			/>
+		</Grid>
+
+		<div class="absolute mt-1 p-2 ml-2 bg-easel-fore border-b-4 border-b-easel-back">
+			{#each currentPainting.palette as color}
+				<button
+					class="swatch ml-1 rounded-full"
+					class:current={color === currentColor}
+					on:click={() => (currentColor = color)}
+					style:--color={color}
+				/>
+			{/each}
+			<button
+				class="swatch leading-none"
+				class:current={'white' === currentColor}
+				on:click={() => (currentColor = 'white')}
+				style:--color={'white'}
+			>
+				&times;
+			</button>
+		</div>
+
+		<button type="button" class="absolute bottom-24 w-36 ml-24 bg-slate-700 text-white" on:click={startScoring}>Submit</button>
+
+	</div>
+
 </div>
 
-	<button type="button" class="self-end w-36 h-16 mr-40 mt-8" on:click={startScoring}>Submit</button>
-
 {:else if step === 'scoring'}
-	<div>
-		<div>art critic thoughts blah blah</div>
-		<img src={finishedPainting} alt="finished painting" />
+
+<div class="bg-museum-review bg-cover bg-no-repeat flex flex-row h-screen">
+
+	<img src="/sprites/bug.png" class="hidden md:block self-end mb-4 ml-4" alt="bug artiste" />
+
+	<div class="pb-12 ml-24 md:ml-0">
+
+		<img src={finishedPainting} alt="finished painting" class="absolute mt-36 sm:mt-16 bg-canvas-bg p-2"/>
+
+		<div class="absolute bottom-24 gap-y-4 flex flex-col ml-12">
+			<button type="button" class="bg-slate-400 text-white" on:click={editPainting}>Edit painting</button>
+			<button type="button" class="bg-slate-700 text-white" on:click={savePainting}>Hang in museum!</button>
+		</div>
+
+	</div>
+
+	<div class="absolute top-0 w-screen sm:right-0 sm:top-24 p-2 sm:w-3/12 bg-critics text-white">
+		<div class="">Critics are saying:</div>
+		<div>Todo: write misc things for critics to say based on feedback and style this div</div>
+
 		<div>Score: {finalScore}</div>
 	</div>
 
-	<button type="button" on:click={editPainting}>Edit painting</button>
-	<button type="button" on:click={savePainting}>Hang in museum!</button>
-{/if}
-
-<img src="/sprites/floor.png" alt="museum floor" class="-mt-40 -z-10"/>
 
 </div>
+
+{/if}
+
+
 
 <style>
 	.full-painting {
@@ -134,7 +156,7 @@
 	}
 
 	.swatch {
-		@apply w-8 h-8;
+		@apply w-8 h-8 p-2;
 		background-color: var(--color);
 	}
 

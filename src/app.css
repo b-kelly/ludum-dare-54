@@ -4,7 +4,6 @@
 
 @layer base {
 	body {
-		@apply p-2;
 		background-color: #A8B5B2;
 	}
 
