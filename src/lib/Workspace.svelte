@@ -2,6 +2,7 @@
 	import type { Painting } from '$lib/data';
 	import { createEventDispatcher } from 'svelte';
 	import Canvas from './Canvas.svelte';
+	import Grid from './Grid.svelte';
 
 	export let painting: Painting;
 
@@ -26,14 +27,18 @@
 </script>
 
 <div class="flex gap-3">
-	<Canvas {painting} {currentColor} />
-	<img
-		class="full-painting"
-		src="/paintings/{painting.id}_full.jpg"
-		alt={painting.name}
-		style:--height={cHeight}
-		style:--width={cWidth}
-	/>
+	<Grid dimensions={painting} multiplier={MULT} class="border border-black">
+		<Canvas {painting} {currentColor} />
+	</Grid>
+	<Grid dimensions={painting} multiplier={MULT} disabled>
+		<img
+			class="full-painting"
+			src="/paintings/{painting.id}_full.jpg"
+			alt={painting.name}
+			style:--height={cHeight}
+			style:--width={cWidth}
+		/>
+	</Grid>
 </div>
 
 <div class="my-4 flex gap-2">

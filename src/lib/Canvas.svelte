@@ -24,30 +24,7 @@
 		ctx.scale(devicePixelRatio, devicePixelRatio);
 
 		canvas.addEventListener('click', (e) => fillColor(ctx, e.offsetX, e.offsetY));
-
-		drawGrid(ctx, painting);
 	});
-
-	function drawGrid(ctx: CanvasRenderingContext2D, painting: Painting) {
-		ctx.strokeStyle = 'rgb(0, 0, 0)';
-		ctx.lineWidth = 1;
-
-		// draw horizontal lines
-		for (let i = 1; i < painting.height; i++) {
-			ctx.beginPath();
-			ctx.moveTo(0, i * MULT);
-			ctx.lineTo(cWidth, i * MULT);
-			ctx.stroke();
-		}
-
-		//draw vertical lines
-		for (let i = 1; i < painting.width; i++) {
-			ctx.beginPath();
-			ctx.moveTo(i * MULT, 0);
-			ctx.lineTo(i * MULT, cHeight);
-			ctx.stroke();
-		}
-	}
 
 	function fillColor(ctx: CanvasRenderingContext2D, x: number, y: number) {
 		ctx.fillStyle = currentColor ?? 'transparent';
@@ -59,13 +36,10 @@
 	}
 </script>
 
-<div>
-	<canvas bind:this={canvas} style:--height={cHeight} style:--width={cWidth} class="paint-canvas" />
-</div>
+<canvas bind:this={canvas} style:--height={cHeight} style:--width={cWidth} class="paint-canvas" />
 
 <style>
 	.paint-canvas {
-		border: 1px solid black;
 		width: calc(var(--width) * 1px);
 		height: calc(var(--height) * 1px);
 	}
