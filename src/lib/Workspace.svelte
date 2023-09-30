@@ -50,6 +50,14 @@
 			style:--color={color}
 		/>
 	{/each}
+	<button
+		class="swatch leading-none"
+		class:current={'white' === currentColor}
+		on:click={() => (currentColor = 'white')}
+		style:--color={'white'}
+	>
+		&times;
+	</button>
 </div>
 
 <button type="button" on:click={submit}>Submit</button>
