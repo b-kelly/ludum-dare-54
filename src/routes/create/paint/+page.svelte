@@ -29,6 +29,10 @@
 		const existing = get(gameState).finishedPaintings[currentPainting.id];
 		if (existing) {
 			finishedPainting = existing.image;
+			// TODO HACK! Don't use setTimeout at all (and try not to redraw manually anyways)
+			window.setTimeout(() => {
+				canvas.redraw();
+			});
 		}
 	});
 
