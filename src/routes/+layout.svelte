@@ -6,6 +6,6 @@
 
 <slot />
 
-<DebugOnly>
+<DebugOnly disabled>
 	user id: {$gameState.userId}
 </DebugOnly>

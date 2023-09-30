@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { Painting } from '$lib/data';
 	import { onMount } from 'svelte';
 
 	export let dimensions: { height: number; width: number };
@@ -9,6 +8,10 @@
 	let canvas: HTMLCanvasElement;
 	$: cHeight = dimensions.height * multiplier;
 	$: cWidth = dimensions.width * multiplier;
+
+	export function getImage() {
+		return canvas.toDataURL();
+	}
 
 	onMount(() => {
 		const ctx = canvas.getContext('2d');

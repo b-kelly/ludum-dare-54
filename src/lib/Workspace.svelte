@@ -5,6 +5,7 @@
 	import Grid from './Grid.svelte';
 
 	export let painting: Painting;
+	let canvas: Canvas;
 
 	const MULT = 16;
 
@@ -21,14 +22,14 @@
 
 	function submit() {
 		dispatch('finish', {
-			image: 'TODO_finished_image'
+			image: canvas.getImage()
 		});
 	}
 </script>
 
 <div class="flex gap-3">
 	<Grid dimensions={painting} multiplier={MULT} class="border border-black">
-		<Canvas dimensions={painting} multiplier={MULT} {currentColor} />
+		<Canvas bind:this={canvas} dimensions={painting} multiplier={MULT} {currentColor} />
 	</Grid>
 	<Grid dimensions={painting} multiplier={MULT} disabled>
 		<img
