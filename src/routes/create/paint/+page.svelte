@@ -7,11 +7,13 @@
 	import { get } from 'svelte/store';
 	import Canvas from '$lib/Canvas.svelte';
 	import Grid from '$lib/Grid.svelte';
+	import DebugOnly from '$lib/DebugOnly.svelte';
+	import { getPixels, loadImageAsync, scoreImage } from '$lib/image';
 
 	export let data: PageData;
 
 	let finishedPainting: string = '';
-	let finalScore = 0;
+	let finalScore: { match: number; total: number; score: number } | undefined;
 
 	let step: 'create' | 'scoring' = 'create';
 	let currentPainting: Painting = paintings[data.painting];
@@ -36,10 +38,15 @@
 		}
 	});
 
-	function startScoring() {
+	async function startScoring() {
 		finishedPainting = canvas.getImage();
-		// TODO score the image!
-		finalScore = 100;
+		// score the image
+		finalScore = await scoreImage(
+			finishedPainting,
+			`/paintings/${currentPainting.id}_16.png`,
+			currentPainting.width,
+			currentPainting.height
+		);
 		step = 'scoring';
 	}
 
@@ -51,7 +58,7 @@
 		gameState.update((gs) => {
 			gs.finishedPaintings[currentPainting.id] = {
 				image: finishedPainting,
-				score: finalScore
+				score: finalScore?.score || 0
 			};
 
 			return gs;
@@ -60,8 +67,6 @@
 		goto('/view');
 	}
 </script>
-
-
 
 {#if step === 'create'}
 
@@ -116,6 +121,18 @@
 
 	</div>
 
+	<DebugOnly>
+		<Grid dimensions={currentPainting} multiplier={MULT}>
+			<img
+				class="full-painting pixelated"
+				src="/paintings/{currentPainting.id}_16.png"
+				alt={currentPainting.name}
+				style:--height={cHeight}
+				style:--width={cWidth}
+			/>
+		</Grid>
+	</DebugOnly>
+
 </div>
 
 {:else if step === 'scoring'}
@@ -139,7 +156,8 @@
 		<div class="">Critics are saying:</div>
 		<div>Todo: write misc things for critics to say based on feedback and style this div</div>
 
-		<div>Score: {finalScore}</div>
+		<div>{finalScore?.match} / {finalScore?.total} pixels match</div>
+		<div>Score: {finalScore?.score || 0}</div>
 	</div>
 
 
@@ -147,12 +165,10 @@
 
 {/if}
 
-
-
 <style>
 	.full-painting {
-		width: calc(var(--width) * .5px);
-		height: calc(var(--height) * .5px);
+		width: calc(var(--width) * 0.5px);
+		height: calc(var(--height) * 0.5px);
 	}
 
 	.swatch {
