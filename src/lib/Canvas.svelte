@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Painting } from '$lib';
+	import type { Painting } from '$lib/data';
 	import { onMount } from 'svelte';
 
 	export let painting: Painting;
