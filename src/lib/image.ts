@@ -26,7 +26,7 @@ export function loadImageAsync(
 	});
 }
 
-export function getPixels(canvas: HTMLCanvasElement, scaleX = 1, scaleY = 1): string[] {
+export function getPixels(canvas: HTMLCanvasElement): string[] {
 	const ctx = canvas.getContext('2d');
 
 	if (!ctx) {
@@ -51,36 +51,7 @@ export function getPixels(canvas: HTMLCanvasElement, scaleX = 1, scaleY = 1): st
 		pixels.push(`${parts.r.toString(16)}${parts.g.toString(16)}${parts.b.toString(16)}`);
 	}
 
-	// if there's no scaling, then just return the raw data
-	if (scaleX === 1 && scaleY === 1) {
-		return pixels;
-	}
-
-	// check that we're not doing fractional scaling
-	const skipX = width / scaleX;
-	const skipY = height / scaleY;
-
-	if (skipX % 1 > 0 || skipY % 1 > 0 || skipX !== skipY) {
-		throw 'Cannot do fractional or subpixel scaling';
-	}
-
-	const trimmed: string[] = [];
-
-	// grab only the number of pixels we're scaling to
-	for (let i = 0; i < scaleX * scaleY; i++) {
-		const row = i % scaleX;
-		const col = Math.floor(i / scaleX);
-		// const pixel = pixels[row + scaleX * col];
-
-		const x = row * skipX;
-		const y = col * skipY;
-		const pixel = pixels[x + scaleX * y];
-
-		trimmed.push(pixel);
-	}
-
-	// TODO scaling
-	return trimmed;
+	return pixels;
 }
 
 export async function scoreImage(
