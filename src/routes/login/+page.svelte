@@ -1,4 +1,4 @@
-<h1>Enter your museum code</h1>
+<h1 class="bm-page-title">Enter your museum code</h1>
 <form on:submit|preventDefault={() => alert('TODO Not implemented')}>
 	<input type="text" />
 	<button type="submit">Enter museum</button>

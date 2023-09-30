@@ -3,14 +3,8 @@
 </script>
 
 {#if dev}
-	<div class="debug-container">
+	<div class="mt-16 p-4 border rounded">
 		<div>DEBUG</div>
 		<slot />
 	</div>
 {/if}
-
-<style>
-	.debug-container {
-		margin-top: 64px;
-	}
-</style>

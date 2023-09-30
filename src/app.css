@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		@apply p-2;
+	}
+
+	a[href] {
+		@apply text-blue-500 hover:text-blue-800;
+	}
+
+	input[type='text'] {
+		@apply border rounded py-1 px-2 outline-blue-400
+            focus-visible:outline;
+	}
+
+	button {
+		@apply text-black bg-white border rounded py-1 px-2
+            hover:bg-neutral-100;
+	}
+}
+
+@layer components {
+	.bm-page-title {
+		@apply text-2xl;
+	}
+}

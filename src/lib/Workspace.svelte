@@ -25,7 +25,7 @@
 	}
 </script>
 
-<div class="container">
+<div class="flex gap-3">
 	<Canvas {painting} {currentColor} />
 	<img
 		class="full-painting"
@@ -36,7 +36,7 @@
 	/>
 </div>
 
-<div class="color-swatches">
+<div class="my-4 flex gap-2">
 	{#each painting.palette as color}
 		<button
 			class="swatch"
@@ -50,30 +50,17 @@
 <button type="button" on:click={submit}>Submit</button>
 
 <style>
-	.container {
-		display: flex;
-		flex-direction: row;
-		gap: 12px;
-	}
-
 	.full-painting {
 		width: calc(var(--width) * 1px);
 		height: calc(var(--height) * 1px);
 	}
 
-	.color-swatches {
-		margin-top: 12px;
-		display: flex;
-		gap: 6px;
-	}
-
 	.swatch {
+		@apply w-8 h-8;
 		background-color: var(--color);
-		height: 32px;
-		width: 32px;
 	}
 
 	.swatch.current {
-		outline: 2px solid red;
+		@apply outline outline-red-600;
 	}
 </style>
