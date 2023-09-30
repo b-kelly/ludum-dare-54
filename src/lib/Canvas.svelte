@@ -4,6 +4,7 @@
 	export let dimensions: { height: number; width: number };
 	export let currentColor: string | undefined;
 	export let multiplier: number;
+	export let initialImage: string = '';
 
 	let canvas: HTMLCanvasElement;
 	$: cHeight = dimensions.height * multiplier;
@@ -13,11 +14,11 @@
 		return canvas.toDataURL();
 	}
 
-	onMount(() => {
-		const ctx = canvas.getContext('2d');
+	export function redraw() {
+		const ctx = canvas?.getContext('2d');
 
 		if (!ctx) {
-			throw 'TODO';
+			throw 'TODO No canvas context';
 		}
 
 		// ensure crisp lines for hidpi screens with partial scaling
@@ -26,6 +27,19 @@
 		ctx.scale(devicePixelRatio, devicePixelRatio);
 
 		canvas.addEventListener('click', (e) => fillColor(ctx, e.offsetX, e.offsetY));
+
+		// if we're editing an image, pre-draw it
+		if (initialImage) {
+			const img = new Image();
+			img.onload = () => {
+				ctx.drawImage(img, 0, 0, cWidth, cHeight);
+			};
+			img.src = initialImage;
+		}
+	}
+
+	onMount(() => {
+		redraw();
 	});
 
 	function fillColor(ctx: CanvasRenderingContext2D, x: number, y: number) {

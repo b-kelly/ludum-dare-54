@@ -14,10 +14,14 @@
 	$: cWidth = dimensions.width * multiplier;
 
 	onMount(() => {
-		const ctx = canvas?.getContext('2d');
+		if (disabled) {
+			return;
+		}
+
+		const ctx = canvas.getContext('2d');
 
 		if (!ctx) {
-			throw 'TODO';
+			throw 'TODO No grid context';
 		}
 
 		// ensure crisp lines for hidpi screens with partial scaling

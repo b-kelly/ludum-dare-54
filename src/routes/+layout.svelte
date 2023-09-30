@@ -6,6 +6,13 @@
 
 <slot />
 
-<DebugOnly disabled>
-	user id: {$gameState.userId}
+<DebugOnly>
+	<pre>{JSON.stringify(
+			{
+				...$gameState,
+				finishedPaintings: Object.keys($gameState.finishedPaintings)
+			},
+			null,
+			4
+		)}</pre>
 </DebugOnly>
