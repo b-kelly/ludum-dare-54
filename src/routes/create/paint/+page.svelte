@@ -61,48 +61,57 @@
 	}
 </script>
 
+<div class="flex flex-col">
+
 {#if step === 'create'}
-	<div class="flex gap-3 select-none">
-		<Grid dimensions={currentPainting} multiplier={MULT} class="border border-black">
-			<Canvas
-				bind:this={canvas}
-				initialImage={finishedPainting}
-				dimensions={currentPainting}
-				multiplier={MULT}
-				{currentColor}
-			/>
-		</Grid>
+<div class="flex flex-row">
+	<img class="mr-36 mt-48" src="/sprites/bug.png" alt="bug with paintbrush"/>
+	<div class="flex select-none">
 		<Grid dimensions={currentPainting} multiplier={MULT} disabled>
 			<img
-				class="full-painting"
+				class="full-painting mr-24 -ml-24"
 				src="/paintings/{currentPainting.id}_full.jpg"
 				alt={currentPainting.name}
 				style:--height={cHeight}
 				style:--width={cWidth}
 			/>
 		</Grid>
-	</div>
+		<div class="flex flex-col">
+			<Grid dimensions={currentPainting} multiplier={MULT} class="border border-black self-start">
+				<Canvas
+					bind:this={canvas}
+					initialImage={finishedPainting}
+					dimensions={currentPainting}
+					multiplier={MULT}
+					{currentColor}
+				/>
+			</Grid>
 
-	<div class="my-4 flex gap-2">
-		{#each currentPainting.palette as color}
-			<button
-				class="swatch"
-				class:current={color === currentColor}
-				on:click={() => (currentColor = color)}
-				style:--color={color}
-			/>
-		{/each}
-		<button
-			class="swatch leading-none"
-			class:current={'white' === currentColor}
-			on:click={() => (currentColor = 'white')}
-			style:--color={'white'}
-		>
-			&times;
-		</button>
+			<div class="my-4 flex gap-2">
+				{#each currentPainting.palette as color}
+					<button
+						class="swatch"
+						class:current={color === currentColor}
+						on:click={() => (currentColor = color)}
+						style:--color={color}
+					/>
+				{/each}
+				<button
+					class="swatch leading-none"
+					class:current={'white' === currentColor}
+					on:click={() => (currentColor = 'white')}
+					style:--color={'white'}
+				>
+					&times;
+				</button>
+			</div>
+		</div>
 	</div>
+	<img src="/sprites/column.png" alt="marble column" class="-mt-4" />
+</div>
 
-	<button type="button" on:click={startScoring}>Submit</button>
+	<button type="button" class="self-end w-36 h-16 mr-40 mt-8" on:click={startScoring}>Submit</button>
+
 {:else if step === 'scoring'}
 	<div>
 		<div>art critic thoughts blah blah</div>
@@ -114,10 +123,14 @@
 	<button type="button" on:click={savePainting}>Hang in museum!</button>
 {/if}
 
+<img src="/sprites/floor.png" alt="museum floor" class="-mt-40 -z-10"/>
+
+</div>
+
 <style>
 	.full-painting {
-		width: calc(var(--width) * 1px);
-		height: calc(var(--height) * 1px);
+		width: calc(var(--width) * .5px);
+		height: calc(var(--height) * .5px);
 	}
 
 	.swatch {
