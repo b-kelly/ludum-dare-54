@@ -23,7 +23,7 @@ export const wings: Wing[] = [
 	{
 		name: '(Post) Impressionist Wing',
 		unlockReq: 100,
-		paintings: ['straw-hat', 'young-woman-ibis', 'sunday-grande-jatte']
+		paintings: ['straw-hat', 'young-woman-bird', 'sunday-grande-jatte']
 	},
 	{
 		name: 'Japanese Wing',
@@ -75,7 +75,7 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'Young Woman with AHH! BIRD!',
 		height: 22,
 		width: 16,
-		palette: ['#a1b2c3']
+		palette: ['#a76c49', '#a04129', '#232822', '#514537', '#2f524d', '#778069']
 	},
 	'portrait-man': {
 		id: 'portrait-man',
