@@ -2,14 +2,14 @@
 	export let open = false;
 </script>
 
-<aside class="modal relative p-lg" class:visible={open}>
+<aside class="modal relative p-lg z-20" class:visible={open}>
 	<div class="modal-dialog">
 		<header class="modal-title">
 			<span>
 				<slot name="title" />
 			</span>
 			<button type="button" class="text-current" on:click={() => (open = false)}>
-				<span>Close</span>
+				<span>X</span>
 			</button>
 		</header>
 		<section class="modal-body">
@@ -20,12 +20,12 @@
 
 <style>
 	.modal {
-		@apply fixed top-0 left-0 w-full h-full hidden
+		@apply w-full h-full fixed top-0 left-0 hidden
             items-center justify-center;
 	}
 
 	.modal-dialog {
-		@apply bg-white max-w-full w-full p-4 gap-4 flex flex-col;
+		@apply bg-slate-300 rounded-sm max-w-full w-full mx-36 p-4 gap-4 flex flex-col;
 	}
 
 	.modal-title {

@@ -20,7 +20,7 @@
 	{#each wings as wing, i}
 		<div class="wing wing-{i + 1}">
 			{#if $gameScore >= wing.unlockReq}
-				<div class="flex align-top ml-11">
+				<div class="flex align-top {(i==0 || i==2) ? "ml-11" : "ml-1"}">
 					{#each wing.paintings as painting}
 						{#if $gameState.finishedPaintings[painting]}
 							<a href="/view/painting?painting={painting}" class="painting">
