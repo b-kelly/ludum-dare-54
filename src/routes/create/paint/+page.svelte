@@ -22,9 +22,11 @@
 
 	const MULT = 16;
 
-	let currentColor: string | undefined;
-	let isDrawerOpen: boolean;
-	let drawerLabel = 'v';
+	const brushSizes = [1, 2, 4];
+	let currentBrush = brushSizes[0];
+
+	let currentColor = currentPainting.palette[0];
+	let isDrawerOpen = false;
 
 	let debug_showTargetOverlay = false;
 	let debug_showPaintingOverlay = false;
@@ -79,15 +81,6 @@
 	function fillEmptyTiles() {
 		//TODO: implement canvas fill (for only empty tiles)
 	}
-
-	function toggleDrawer() {
-		isDrawerOpen = !isDrawerOpen;
-		if (isDrawerOpen) {
-			drawerLabel = '^';
-			return;
-		}
-		drawerLabel = 'V';
-	}
 </script>
 
 {#if step === 'create'}
@@ -118,6 +111,7 @@
 					dimensions={currentPainting}
 					multiplier={MULT}
 					{currentColor}
+					brushSize={currentBrush}
 				/>
 				<img
 					class="full-painting absolute top-0 left-0 opacity-40"
@@ -130,37 +124,63 @@
 			</Grid>
 
 			<div class="absolute mt-1 p-2 ml-2 bg-easel-fore border-b-4 border-b-easel-back">
-				<div>
+				<div class="flex gap-1">
 					{#each currentPainting.palette as color}
+						<div>
+							<input
+								id="radio-{color}"
+								class="sr-only"
+								type="radio"
+								value={color}
+								bind:group={currentColor}
+							/>
+							<label for="radio-{color}" class="swatch" style:--color={color}>
+								<span class="sr-only">{color}</span>
+							</label>
+						</div>
+					{/each}
+					<div>
 						<input
-							id="radio-{color}"
+							id="radio-transparent"
 							class="sr-only"
 							type="radio"
-							value={color}
+							value="transparent"
 							bind:group={currentColor}
 						/>
-						<label for="radio-{color}" class="swatch ml-1 rounded-full" style:--color={color}>
-							<span class="sr-only">{color}</span>
+						<label for="radio-transparent" class="swatch" style:--color="white">
+							<span class="sr-only">transparent</span>
 						</label>
-					{/each}
-					<input
-						id="radio-transparent"
-						class="sr-only"
-						type="radio"
-						value="transparent"
-						bind:group={currentColor}
-					/>
-					<label for="radio-transparent" class="swatch ml-1 rounded-full" style:--color="white">
-						<span class="sr-only">transparent</span>
-					</label>
-					<button class="leading-none h-8 p-2 w-8 bg-slate-500" on:click={toggleDrawer}>
-						{drawerLabel}
+					</div>
+					<button
+						class="leading-none h-8 p-2 w-8 bg-slate-500"
+						on:click={() => (isDrawerOpen = !isDrawerOpen)}
+					>
+						{#if isDrawerOpen}
+							<span>^</span>
+						{:else}
+							<span>v</span>
+						{/if}
 					</button>
 				</div>
 				{#if isDrawerOpen}
 					<div class="mt-2 text-sm">
 						<button on:click={() => fillEmptyTiles}>Fill empty tiles with selected color</button>
 						<button class="bg-red-500" on:click={() => eraseCanvas}>Clear all tiles</button>
+						<div class="flex gap-2">
+							{#each brushSizes as brush}
+								<div>
+									<input
+										id="radio-brush-{brush}"
+										type="radio"
+										value={brush}
+										bind:group={currentBrush}
+									/>
+									<label for="radio-brush-{brush}">
+										{brush}
+									</label>
+								</div>
+							{/each}
+						</div>
 					</div>
 				{/if}
 			</div>
@@ -242,7 +262,7 @@
 	}
 
 	.swatch {
-		@apply w-8 h-8 p-2 inline-block cursor-pointer;
+		@apply w-8 h-8 inline-block cursor-pointer rounded-full;
 		background-color: var(--color);
 	}
 
