@@ -7,7 +7,7 @@
 	let helpModalOpen = false;
 </script>
 
-<div class="museum">
+<div class="museum h-screen">
 	<div class="lobby text-2xl px-8">
 		<div>
 			<h2 class="font-headings text-white text-center mt-28">Lobby</h2>
@@ -58,6 +58,7 @@
 	.museum {
 		@apply grid grid-flow-dense w-full justify-center;
 		grid-template-columns: repeat(3, minmax(0, max-content));
+		background-image: url('/sprites/grass.png');
 	}
 
 	.lobby {

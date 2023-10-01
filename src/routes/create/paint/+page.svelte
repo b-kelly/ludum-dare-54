@@ -163,10 +163,9 @@
 					</button>
 				</div>
 				{#if isDrawerOpen}
-					<div class="mt-2 text-sm">
-						<button on:click={() => fillEmptyTiles}>Fill empty tiles with selected color</button>
-						<button class="bg-red-500" on:click={() => eraseCanvas}>Clear all tiles</button>
-						<div class="flex gap-2">
+					<div class="mt-2 text-sm flex gap-2 justify-evenly content-center">
+							<button class="bg-red-500" on:click={() => eraseCanvas}>Clear all tiles</button>
+							<div>Brush size:</div>
 							{#each brushSizes as brush}
 								<div>
 									<input
@@ -176,12 +175,11 @@
 										bind:group={currentBrush}
 									/>
 									<label for="radio-brush-{brush}">
-										{brush}
+										{brush}px
 									</label>
 								</div>
 							{/each}
 						</div>
-					</div>
 				{/if}
 			</div>
 
@@ -221,11 +219,11 @@
 		</DebugOnly>
 	</div>
 {:else if step === 'scoring'}
-	<div class="bg-museum-review bg-cover bg-no-repeat flex flex-row h-screen">
+	<div class="bg-museum-review bg-cover bg-no-repeat flex flex-row gap-8 min-h-screen pt-8 px-4">
 		<img src="/sprites/bug.png" class="hidden md:block self-end mb-4 ml-4" alt="bug artiste" />
 
 		<div class="pb-12 ml-24 md:ml-0">
-			<div class="absolute mt-36 sm:mt-16 flex flex-col">
+			<div class="mt-36 sm:mt-16 flex flex-col">
 				<img src={finishedPainting} alt="finished painting" class="bg-canvas-bg p-2" />
 				<div class="bg-yellow-600 text-white p-1 mt-1 w100 text-center">
 					{currentPainting.bugName} - adapted by Bug
