@@ -26,6 +26,9 @@
 	let isDrawerOpen: boolean;
 	let drawerLabel = 'v';
 
+	let debug_showTargetOverlay = false;
+	let debug_showPaintingOverlay = false;
+
 	$: cHeight = currentPainting.height * MULT;
 	$: cWidth = currentPainting.width * MULT;
 
@@ -116,6 +119,14 @@
 					multiplier={MULT}
 					{currentColor}
 				/>
+				<img
+					class="full-painting absolute top-0 left-0 opacity-40"
+					class:hidden={!debug_showPaintingOverlay}
+					src="/paintings/{currentPainting.id}_full.jpg"
+					alt={currentPainting.name}
+					style:--height={cHeight}
+					style:--width={cWidth}
+				/>
 			</Grid>
 
 			<div class="absolute mt-1 p-2 ml-2 bg-easel-fore border-b-4 border-b-easel-back">
@@ -136,11 +147,11 @@
 					>
 						&times;
 					</button>
-					<button class="leading-none h-8 p-2 w-8 bg-slate-500" on:click={toggleDrawer}
-						>{drawerLabel}</button
-					>
+					<button class="leading-none h-8 p-2 w-8 bg-slate-500" on:click={toggleDrawer}>
+						{drawerLabel}
+					</button>
 				</div>
-				{#if isDrawerOpen == true}
+				{#if isDrawerOpen}
 					<div class="mt-2 text-sm">
 						<button on:click={() => fillEmptyTiles}>Fill empty tiles with selected color</button>
 						<button class="bg-red-500" on:click={() => eraseCanvas}>Clear all tiles</button>
@@ -156,15 +167,31 @@
 		</div>
 
 		<DebugOnly>
-			<Grid dimensions={currentPainting} multiplier={MULT}>
-				<img
-					class="full-painting pixelated"
-					src="/paintings/{currentPainting.id}_target.png"
-					alt={currentPainting.name}
-					style:--height={cHeight}
-					style:--width={cWidth}
-				/>
-			</Grid>
+			<div>
+				<Grid dimensions={currentPainting} multiplier={MULT}>
+					<img
+						class="full-painting pixelated"
+						src="/paintings/{currentPainting.id}_target.png"
+						alt={currentPainting.name}
+						style:--height={cHeight}
+						style:--width={cWidth}
+					/>
+					<img
+						class="full-painting absolute top-0 left-0 opacity-40"
+						class:hidden={!debug_showTargetOverlay}
+						src="/paintings/{currentPainting.id}_full.jpg"
+						alt={currentPainting.name}
+						style:--height={cHeight}
+						style:--width={cWidth}
+					/>
+				</Grid>
+				<label>
+					<input type="checkbox" bind:checked={debug_showTargetOverlay} /> Show target overlay
+				</label>
+				<label>
+					<input type="checkbox" bind:checked={debug_showPaintingOverlay} /> Show painting overlay
+				</label>
+			</div>
 		</DebugOnly>
 	</div>
 {:else if step === 'scoring'}
@@ -178,12 +205,12 @@
 					{currentPainting.bugName} - adapted by Bug
 				</div>
 
-				<button type="button" class="bg-slate-400 text-white mt-24" on:click={editPainting}
-					>Edit painting</button
-				>
-				<button type="button" class="bg-slate-700 text-white mt-4" on:click={savePainting}
-					>Hang in museum!</button
-				>
+				<button type="button" class="bg-slate-400 text-white mt-24" on:click={editPainting}>
+					Edit painting
+				</button>
+				<button type="button" class="bg-slate-700 text-white mt-4" on:click={savePainting}>
+					Hang in museum!
+				</button>
 			</div>
 		</div>
 

@@ -7,18 +7,21 @@
 <slot />
 
 <DebugOnly>
-	<button
-		on:click|preventDefault={() => {
-			localStorage.clear();
-			document.location.reload();
-		}}>Clear data</button
-	>
-	<pre>{JSON.stringify(
-			{
-				...$gameState,
-				finishedPaintings: Object.keys($gameState.finishedPaintings)
-			},
-			null,
-			4
-		)}</pre>
+	<div class="my-16 mx-4 p-4 border rounded bg-white">
+		<div>DEBUG</div>
+		<button
+			on:click|preventDefault={() => {
+				localStorage.clear();
+				document.location.reload();
+			}}>Clear data</button
+		>
+		<pre>{JSON.stringify(
+				{
+					...$gameState,
+					finishedPaintings: Object.keys($gameState.finishedPaintings)
+				},
+				null,
+				4
+			)}</pre>
+	</div>
 </DebugOnly>
