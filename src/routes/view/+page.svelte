@@ -20,7 +20,7 @@
 	{#each wings as wing, i}
 		<div class="wing wing-{i + 1}">
 			{#if $gameScore >= wing.unlockReq}
-				<div class="flex align-top {(i==0 || i==2) ? "ml-11" : "ml-1"}">
+				<div class="flex align-top {i == 0 || i == 2 ? 'ml-11' : 'ml-1'}">
 					{#each wing.paintings as painting}
 						{#if $gameState.finishedPaintings[painting]}
 							<a href="/view/painting?painting={painting}" class="painting">
@@ -54,10 +54,13 @@
 	<div slot="body">bar</div>
 </Modal>
 
-<style>
+<style lang="postcss">
 	.museum {
-		@apply grid grid-flow-dense w-full justify-center;
-		grid-template-columns: repeat(3, minmax(0, max-content));
+		@apply lg:grid lg:grid-flow-dense lg:justify-center lg:items-start
+			flex flex-col overflow-auto items-center gap-y-5;
+		grid-template-columns: repeat(3, minmax(auto, max-content));
+		grid-template-rows: 282px; /* TODO hardcoded */
+
 		background-image: url('/sprites/grass.png');
 	}
 
@@ -66,13 +69,13 @@
 			flex flex-col;
 		background-image: url('/sprites/lobby.png');
 		grid-column: 2;
-		height: 840px;
+		min-height: 840px;
 		width: 264px;
 	}
 
 	.wing {
-		@apply p-4 bg-no-repeat relative;
-		height: 282px;
+		@apply bg-no-repeat relative;
+		min-height: 282px;
 		width: 432px;
 		padding: 18px 32px;
 		margin-top: 20px;
@@ -88,12 +91,10 @@
 
 	.wing-3 {
 		background-image: url('/sprites/wing-3.png');
-		margin-top: -180px;
 	}
 
 	.wing-4 {
 		background-image: url('/sprites/wing-4.png');
-		margin-top: -180px;
 	}
 
 	.painting {
