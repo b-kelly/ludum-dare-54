@@ -8,7 +8,7 @@
 	import Canvas from '$lib/Canvas.svelte';
 	import Grid from '$lib/Grid.svelte';
 	import DebugOnly from '$lib/DebugOnly.svelte';
-	import { getPixels, loadImageAsync, scoreImage, getCriticReview } from '$lib/image';
+	import { scoreImage, getCriticReview } from '$lib/image';
 
 	export let data: PageData;
 
@@ -164,22 +164,22 @@
 				</div>
 				{#if isDrawerOpen}
 					<div class="mt-2 text-sm flex gap-2 justify-evenly content-center">
-							<button class="bg-red-500" on:click={() => eraseCanvas}>Clear all tiles</button>
-							<div>Brush size:</div>
-							{#each brushSizes as brush}
-								<div>
-									<input
-										id="radio-brush-{brush}"
-										type="radio"
-										value={brush}
-										bind:group={currentBrush}
-									/>
-									<label for="radio-brush-{brush}">
-										{brush}px
-									</label>
-								</div>
-							{/each}
-						</div>
+						<button class="bg-red-500" on:click={() => eraseCanvas}>Clear all tiles</button>
+						<div>Brush size:</div>
+						{#each brushSizes as brush}
+							<div>
+								<input
+									id="radio-brush-{brush}"
+									type="radio"
+									value={brush}
+									bind:group={currentBrush}
+								/>
+								<label for="radio-brush-{brush}">
+									{brush}px
+								</label>
+							</div>
+						{/each}
+					</div>
 				{/if}
 			</div>
 
@@ -190,7 +190,7 @@
 			>
 		</div>
 
-		<DebugOnly>
+		<DebugOnly disabled>
 			<div>
 				<Grid dimensions={currentPainting} multiplier={MULT}>
 					<img
