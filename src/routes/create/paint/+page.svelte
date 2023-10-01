@@ -114,7 +114,7 @@
 					brushSize={currentBrush}
 				/>
 				<img
-					class="full-painting absolute top-0 left-0 opacity-40"
+					class="full-painting absolute top-0 left-0 pointer-events-none opacity-40"
 					class:hidden={!debug_showPaintingOverlay}
 					src="/paintings/{currentPainting.id}_full.jpg"
 					alt={currentPainting.name}
