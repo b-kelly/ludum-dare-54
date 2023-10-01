@@ -66,20 +66,16 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'Man Portrait with a Yummy Hat',
 		height: 20,
 		width: 16,
-		palette: [
-			'#a1b2c3',
-		]
+		palette: ['#a1b2c3']
 	},
-	'young-woman-ibis': {
-		id: 'young-woman-ibis',
+	'young-woman-bird': {
+		id: 'young-woman-bird',
 		name: 'Young Woman with Ibis',
 		artist: 'Edgar Degas',
 		bugName: 'Young Woman with AHH! BIRD!',
 		height: 22,
 		width: 16,
-		palette: [
-			'#a1b2c3',
-		]
+		palette: ['#a1b2c3']
 	},
 	'portrait-man': {
 		id: 'portrait-man',
@@ -88,9 +84,7 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'Portrait of a ladybug',
 		height: 23,
 		width: 18,
-		palette: [
-			'#a1b2c3',
-		]
+		palette: ['#a1b2c3']
 	},
 	'crow-and-willow': {
 		id: 'crow-and-willow',
@@ -99,9 +93,7 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'AHH! BIRD! and Willow Tree',
 		height: 22,
 		width: 16,
-		palette: [
-			'#a1b2c3',
-		]
+		palette: ['#a1b2c3']
 	},
 	'under-the-wave': {
 		id: 'under-the-wave',
@@ -110,9 +102,7 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'I Am Not a Water Bug',
 		height: 17,
 		width: 24,
-		palette: [
-			'#a1b2c3',
-		]
+		palette: ['#a1b2c3']
 	},
 	'sunday-grande-jatte': {
 		id: 'sunday-grande-jatte',
@@ -121,9 +111,7 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'A Sunday with La Grass Hopper',
 		height: 16,
 		width: 24,
-		palette: [
-			'#a1b2c3',
-		]
+		palette: ['#a1b2c3']
 	},
 	'mada-primavesi': {
 		id: 'mada-primavesi',
@@ -132,9 +120,7 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'Springtime Flower Girl',
 		height: 23,
 		width: 18,
-		palette: [
-			'#a1b2c3',
-		]
+		palette: ['#a1b2c3']
 	},
 	'two-women': {
 		id: 'two-women',
@@ -143,9 +129,7 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'Two Women and some Tasty Fruit',
 		height: 16,
 		width: 20,
-		palette: [
-			'#a1b2c3',
-		]
+		palette: ['#a1b2c3']
 	},
 	'parliament-sunset': {
 		id: 'parliament-sunset',
@@ -154,9 +138,7 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'This is so hard',
 		height: 20,
 		width: 23,
-		palette: [
-			'#a1b2c3',
-		]
+		palette: ['#a1b2c3']
 	},
 	'margaret-austria': {
 		id: 'margaret-austria',
@@ -165,8 +147,6 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'Margaret Far Away',
 		height: 24,
 		width: 27,
-		palette: [
-			'#a1b2c3',
-		]
-	},
+		palette: ['#a1b2c3']
+	}
 };
