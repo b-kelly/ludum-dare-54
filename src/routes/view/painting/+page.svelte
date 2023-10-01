@@ -2,6 +2,7 @@
 	import { paintings } from '$lib/data';
 	import { gameState } from '$lib/gameState';
 	import type { PageData } from './$types';
+	import { getCriticReview } from '$lib/image';
 
 	export let data: PageData;
 
@@ -27,8 +28,8 @@
 
 	<div>
 		<div class="bg-critics text-white p-4">
-			<div>Critics are saying:</div>
-			<div>Todo: write misc things for critics to say based on feedback and style this div</div>
+			<div class="font-headings">Critics are saying:</div>
+			<div>"{getCriticReview(playerPainting.score)}"</div>
 
 			<div>Score: {playerPainting.score || 0}</div>
 		</div>

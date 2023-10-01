@@ -15,8 +15,6 @@ export interface Painting {
 }
 
 export interface Review {
-	id: number;
-	scoreMin: number;
 	scoreMax: number;
 	content: string;
 	critic: number;
@@ -161,43 +159,31 @@ export const paintings: Record<string, Painting> = {
 
 export const reviews: Review[] = [
 	{
-		id: 1,
-		scoreMin: 0,
 		scoreMax: 19,
 		content: "I'm not sure where the bug museum is getting its funding, but they're surely not using it.",
 		critic: 1
 	},
 	{
-		id: 2,
-		scoreMin: 20,
 		scoreMax: 39,
 		content: "I've seen better reproductions - much better... but then again, I've also seen worse...",
 		critic: 2
 	},
 	{
-		id: 3,
-		scoreMin: 40,
 		scoreMax: 59,
 		content: "Truly reminiscent of Picasso's baby period. When he was a baby. Needs work.",
 		critic: 3
 	},
 	{
-		id: 4,
-		scoreMin: 60,
 		scoreMax: 79,
 		content: "Really solid reproduction - bugs will flock from all over (the backyard) to see this work!",
 		critic: 4
 	},
 	{
-		id: 5,
-		scoreMin: 80,
 		scoreMax: 89,
 		content: "This museum has really outdone itself, producing a work of absolute grandeur and majesty. But, tiny.",
 		critic: 5
 	},
 	{
-		id: 6,
-		scoreMin: 90,
 		scoreMax: 100,
 		content: "I've never seen work as beautiful as this. Dare I say... better than the original?!",
 		critic: 6

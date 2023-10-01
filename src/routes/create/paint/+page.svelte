@@ -8,7 +8,7 @@
 	import Canvas from '$lib/Canvas.svelte';
 	import Grid from '$lib/Grid.svelte';
 	import DebugOnly from '$lib/DebugOnly.svelte';
-	import { getPixels, loadImageAsync, scoreImage } from '$lib/image';
+	import { getPixels, loadImageAsync, scoreImage, getCriticReview } from '$lib/image';
 
 	export let data: PageData;
 
@@ -239,8 +239,8 @@
 		</div>
 
 		<div class="absolute top-0 w-screen sm:right-0 sm:top-24 p-2 sm:w-3/12 bg-critics text-white">
-			<div class="">Critics are saying:</div>
-			<div>Todo: write misc things for critics to say based on feedback and style this div</div>
+			<div class="font-headings">Critics are saying:</div>
+			<div>"{getCriticReview(finalScore?.score || 0)}"</div>
 
 			<div>{finalScore?.match} / {finalScore?.total} pixels match</div>
 			<div>Score: {finalScore?.score || 0}</div>

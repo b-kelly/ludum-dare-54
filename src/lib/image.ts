@@ -1,3 +1,5 @@
+import {reviews} from '$lib/data';
+
 export function loadImageAsync(
 	src: string,
 	width: number,
@@ -92,4 +94,14 @@ export async function scoreImage(
 		total: targetPixels.length,
 		score: Math.floor((correctPixels / targetPixels.length) * 100)
 	};
+}
+
+export function getCriticReview (score: number) {
+
+	for (let i = 1; reviews.length; i++)
+	{
+		if (score <= reviews[i-1].scoreMax)
+		return reviews[i-1].content;
+	}
+
 }
