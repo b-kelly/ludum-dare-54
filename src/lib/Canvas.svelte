@@ -6,6 +6,7 @@
 	export let currentColor: string | undefined;
 	export let multiplier: number;
 	export let initialImage: string = '';
+	export let brushSize = 1;
 
 	let canvas: HTMLCanvasElement;
 	$: cHeight = dimensions.height * multiplier;
@@ -37,7 +38,7 @@
 		}
 
 		// drag-and-draw painting
-		canvas.addEventListener('mousedown', function(e) {
+		canvas.addEventListener('mousedown', function (e) {
 			fillColor(ctx, e.offsetX, e.offsetY);
 			canvas.addEventListener('mousemove', dragAndDraw);
 			window.addEventListener('mouseup', stopDrawing);
@@ -53,22 +54,22 @@
 		redraw();
 	});
 
-	function getColor(ctx: CanvasRenderingContext2D | null, x: number, y: number) {
-
-	}
-
 	function fillColor(ctx: CanvasRenderingContext2D | null, x: number, y: number) {
-		if (!ctx) return;
+		if (!ctx) {
+			return;
+		}
 
 		ctx.fillStyle = currentColor ?? 'transparent';
 
 		const clampX = Math.floor(x / multiplier) * multiplier;
 		const clampY = Math.floor(y / multiplier) * multiplier;
 
-		ctx.clearRect(clampX, clampY, multiplier, multiplier);
+		const brushWidth = multiplier * brushSize;
+
+		ctx.clearRect(clampX, clampY, brushWidth, brushWidth);
 
 		if (ctx.fillStyle !== 'transparent') {
-			ctx.fillRect(clampX, clampY, multiplier, multiplier);
+			ctx.fillRect(clampX, clampY, brushWidth, brushWidth);
 		}
 	}
 </script>

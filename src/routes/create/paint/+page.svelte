@@ -22,9 +22,14 @@
 
 	const MULT = 16;
 
-	let currentColor: string | undefined;
-	let isDrawerOpen: boolean;
-	let drawerLabel = 'v';
+	const brushSizes = [1, 2, 4];
+	let currentBrush = brushSizes[0];
+
+	let currentColor = currentPainting.palette[0];
+	let isDrawerOpen = false;
+
+	let debug_showTargetOverlay = false;
+	let debug_showPaintingOverlay = false;
 
 	$: cHeight = currentPainting.height * MULT;
 	$: cWidth = currentPainting.width * MULT;
@@ -76,15 +81,6 @@
 	function fillEmptyTiles() {
 		//TODO: implement canvas fill (for only empty tiles)
 	}
-
-	function toggleDrawer() {
-		isDrawerOpen = !isDrawerOpen;
-		if (isDrawerOpen) {
-			drawerLabel = '^';
-			return;
-		}
-		drawerLabel = 'V';
-	}
 </script>
 
 {#if step === 'create'}
@@ -115,35 +111,76 @@
 					dimensions={currentPainting}
 					multiplier={MULT}
 					{currentColor}
+					brushSize={currentBrush}
+				/>
+				<img
+					class="full-painting absolute top-0 left-0 opacity-40"
+					class:hidden={!debug_showPaintingOverlay}
+					src="/paintings/{currentPainting.id}_full.jpg"
+					alt={currentPainting.name}
+					style:--height={cHeight}
+					style:--width={cWidth}
 				/>
 			</Grid>
 
 			<div class="absolute mt-1 p-2 ml-2 bg-easel-fore border-b-4 border-b-easel-back">
-				<div>
+				<div class="flex gap-1">
 					{#each currentPainting.palette as color}
-						<button
-							class="swatch ml-1 rounded-full"
-							class:current={color === currentColor}
-							on:click={() => (currentColor = color)}
-							style:--color={color}
-						/>
+						<div>
+							<input
+								id="radio-{color}"
+								class="sr-only"
+								type="radio"
+								value={color}
+								bind:group={currentColor}
+							/>
+							<label for="radio-{color}" class="swatch" style:--color={color}>
+								<span class="sr-only">{color}</span>
+							</label>
+						</div>
 					{/each}
+					<div>
+						<input
+							id="radio-transparent"
+							class="sr-only"
+							type="radio"
+							value="transparent"
+							bind:group={currentColor}
+						/>
+						<label for="radio-transparent" class="swatch" style:--color="white">
+							<span class="sr-only">transparent</span>
+						</label>
+					</div>
 					<button
-						class="swatch leading-none"
-						class:current={'transparent' === currentColor}
-						on:click={() => (currentColor = 'transparent')}
-						style:--color={'white'}
+						class="leading-none h-8 p-2 w-8 bg-slate-500"
+						on:click={() => (isDrawerOpen = !isDrawerOpen)}
 					>
-						&times;
+						{#if isDrawerOpen}
+							<span>^</span>
+						{:else}
+							<span>v</span>
+						{/if}
 					</button>
-					<button class="leading-none h-8 p-2 w-8 bg-slate-500" on:click={toggleDrawer}
-						>{drawerLabel}</button
-					>
 				</div>
-				{#if isDrawerOpen == true}
+				{#if isDrawerOpen}
 					<div class="mt-2 text-sm">
 						<button on:click={() => fillEmptyTiles}>Fill empty tiles with selected color</button>
 						<button class="bg-red-500" on:click={() => eraseCanvas}>Clear all tiles</button>
+						<div class="flex gap-2">
+							{#each brushSizes as brush}
+								<div>
+									<input
+										id="radio-brush-{brush}"
+										type="radio"
+										value={brush}
+										bind:group={currentBrush}
+									/>
+									<label for="radio-brush-{brush}">
+										{brush}
+									</label>
+								</div>
+							{/each}
+						</div>
 					</div>
 				{/if}
 			</div>
@@ -156,15 +193,31 @@
 		</div>
 
 		<DebugOnly>
-			<Grid dimensions={currentPainting} multiplier={MULT}>
-				<img
-					class="full-painting pixelated"
-					src="/paintings/{currentPainting.id}_target.png"
-					alt={currentPainting.name}
-					style:--height={cHeight}
-					style:--width={cWidth}
-				/>
-			</Grid>
+			<div>
+				<Grid dimensions={currentPainting} multiplier={MULT}>
+					<img
+						class="full-painting pixelated"
+						src="/paintings/{currentPainting.id}_target.png"
+						alt={currentPainting.name}
+						style:--height={cHeight}
+						style:--width={cWidth}
+					/>
+					<img
+						class="full-painting absolute top-0 left-0 opacity-40"
+						class:hidden={!debug_showTargetOverlay}
+						src="/paintings/{currentPainting.id}_full.jpg"
+						alt={currentPainting.name}
+						style:--height={cHeight}
+						style:--width={cWidth}
+					/>
+				</Grid>
+				<label>
+					<input type="checkbox" bind:checked={debug_showTargetOverlay} /> Show target overlay
+				</label>
+				<label>
+					<input type="checkbox" bind:checked={debug_showPaintingOverlay} /> Show painting overlay
+				</label>
+			</div>
 		</DebugOnly>
 	</div>
 {:else if step === 'scoring'}
@@ -178,12 +231,12 @@
 					{currentPainting.bugName} - adapted by Bug
 				</div>
 
-				<button type="button" class="bg-slate-400 text-white mt-24" on:click={editPainting}
-					>Edit painting</button
-				>
-				<button type="button" class="bg-slate-700 text-white mt-4" on:click={savePainting}
-					>Hang in museum!</button
-				>
+				<button type="button" class="bg-slate-400 text-white mt-24" on:click={editPainting}>
+					Edit painting
+				</button>
+				<button type="button" class="bg-slate-700 text-white mt-4" on:click={savePainting}>
+					Hang in museum!
+				</button>
 			</div>
 		</div>
 
@@ -209,11 +262,15 @@
 	}
 
 	.swatch {
-		@apply w-8 h-8 p-2;
+		@apply w-8 h-8 inline-block cursor-pointer rounded-full;
 		background-color: var(--color);
 	}
 
-	.swatch.current {
+	input:checked + .swatch {
 		@apply outline outline-red-600;
+	}
+
+	input:focus-visible + .swatch {
+		@apply outline;
 	}
 </style>
