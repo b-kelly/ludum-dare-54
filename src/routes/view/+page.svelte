@@ -15,7 +15,7 @@
 		</div>
 		<a href="/TODO" class="mt-28">Hall of Fame</a>
 		<button class="mt-48" on:click={() => (creditsModalOpen = true)}>View Credits</button>
-		<a href="/TODO" class="mt-28">View Help</a>
+		<button class="mt-28" on:click={() => (helpModalOpen = true)}>View Help</button>
 	</div>
 	{#each wings as wing, i}
 		<div class="wing wing-{i + 1}">
@@ -56,9 +56,8 @@
 
 <style>
 	.museum {
-		@apply grid grid-flow-dense;
+		@apply grid grid-flow-dense w-full justify-center;
 		grid-template-columns: repeat(3, minmax(0, max-content));
-		margin: 24px 0 0 24px;
 	}
 
 	.lobby {
@@ -68,7 +67,6 @@
 		grid-column: 2;
 		height: 840px;
 		width: 264px;
-		z-index: 10;
 	}
 
 	.wing {
