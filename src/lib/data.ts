@@ -49,14 +49,14 @@ export const paintings: Record<string, Painting> = {
 		height: 24,
 		width: 16,
 		palette: [
-			'#606948',
-			'#798453',
-			'#96955e',
-			'#604f33',
-			'#916a35',
-			'#4f322a',
-			'#231524',
-			'#cea552'
+			'#798555',
+			'#96965e',
+			'#604f31',
+			'#d1a952',
+			'#231625',
+			'#c3bc81',
+			'#584e39',
+			'#c3bc81'
 		]
 	},
 	'straw-hat': {
@@ -82,9 +82,9 @@ export const paintings: Record<string, Painting> = {
 		name: 'Portrait of a Man',
 		artist: 'Domenico Ghirlandaio',
 		bugName: 'Portrait of a ladybug',
-		height: 23,
-		width: 18,
-		palette: ['#a1b2c3']
+		height: 20,
+		width: 16,
+		palette: ['#35501a', '#515424', '#372922', '#b4885f', '#9f6a40', '#632121', '#a7241b']
 	},
 	'crow-and-willow': {
 		id: 'crow-and-willow',
@@ -145,8 +145,8 @@ export const paintings: Record<string, Painting> = {
 		name: 'Margaret of Austria',
 		artist: 'Jean Hey',
 		bugName: 'Margaret Far Away',
-		height: 24,
-		width: 27,
-		palette: ['#a1b2c3']
+		height: 23,
+		width: 16,
+		palette: ['#748571', '#91603a', '#2a0f08', '#617e85', '#738d8e', '#9d8e59', '#c5bbad']
 	}
 };
