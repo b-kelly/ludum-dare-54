@@ -3,15 +3,6 @@
 	import { gameState, gameScore } from '$lib/gameState';
 </script>
 
-<!-- <div class="bg-gray-900 w-screen h-screen absolute -z-10">
-	<div class="flex">
-		<img src="/sprites/museum.png" alt="museum overhead view" class="" />
-		<img src="/sprites/closed-wing-2.png" alt="museum overhead view" class="absolute w-min" />
-		<img src="/sprites/closed-wing-3.png" alt="museum overhead view" class="absolute w-min" />
-		<img src="/sprites/closed-wing-4.png" alt="museum overhead view" class="absolute w-min" />
-	</div>
-</div> -->
-
 <div class="museum">
 	<div class="lobby">
 		<h2>Lobby</h2>
