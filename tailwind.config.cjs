@@ -16,6 +16,10 @@ const config = {
 			},
 			colors: {
 				'easel-back': '#7A4841'
+			},
+			fontFamily: {
+				'headings': 'Righteous, sans-serif',
+				'contents': 'Quicksand, sans-serif',
 			}
 		},
 	},

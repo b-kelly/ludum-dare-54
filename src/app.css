@@ -5,10 +5,11 @@
 @layer base {
 	body {
 		background-color: #A8B5B2;
+		font-family: 'Quicksand', sans-serif;
 	}
 
 	a[href] {
-		@apply text-blue-500 hover:text-blue-800;
+		@apply text-blue-200 hover:text-blue-500;
 	}
 
 	input[type='text'] {
@@ -17,8 +18,8 @@
 	}
 
 	button {
-		@apply text-black bg-white border rounded py-1 px-2
-            hover:bg-neutral-100;
+		@apply text-white bg-slate-500 border rounded py-1 px-2
+            hover:bg-slate-700;
 	}
 }
 
