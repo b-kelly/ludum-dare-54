@@ -175,7 +175,7 @@
 			<div class="absolute mt-36 sm:mt-16 flex flex-col">
 				<img src={finishedPainting} alt="finished painting" class="bg-canvas-bg p-2" />
 				<div class="bg-yellow-600 text-white p-1 mt-1 w100 text-center">
-					Bugga Lisa - adapted by Bug
+					{currentPainting.bugName} - adapted by Bug
 				</div>
 
 				<button type="button" class="bg-slate-400 text-white mt-24" on:click={editPainting}
