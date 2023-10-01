@@ -6,7 +6,7 @@
 
 <slot />
 
-<DebugOnly>
+<DebugOnly disabled>
 	<div class="my-16 mx-4 p-4 border rounded bg-white">
 		<div>DEBUG</div>
 		<button
