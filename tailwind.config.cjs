@@ -7,6 +7,7 @@ const config = {
 			backgroundImage: {
 				'museum-paint': "url('/sprites/background-paint.png')",
 				'museum-review': "url('/sprites/background-review.png')",
+				'bug': "url('/sprites/bug.png')"
 			},
 			backgroundColor: {
 				'easel-fore': '#AD7757',
