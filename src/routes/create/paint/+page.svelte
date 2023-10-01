@@ -132,21 +132,27 @@
 			<div class="absolute mt-1 p-2 ml-2 bg-easel-fore border-b-4 border-b-easel-back">
 				<div>
 					{#each currentPainting.palette as color}
-						<button
-							class="swatch ml-1 rounded-full"
-							class:current={color === currentColor}
-							on:click={() => (currentColor = color)}
-							style:--color={color}
+						<input
+							id="radio-{color}"
+							class="sr-only"
+							type="radio"
+							value={color}
+							bind:group={currentColor}
 						/>
+						<label for="radio-{color}" class="swatch ml-1 rounded-full" style:--color={color}>
+							<span class="sr-only">{color}</span>
+						</label>
 					{/each}
-					<button
-						class="swatch leading-none"
-						class:current={'transparent' === currentColor}
-						on:click={() => (currentColor = 'transparent')}
-						style:--color={'white'}
-					>
-						&times;
-					</button>
+					<input
+						id="radio-transparent"
+						class="sr-only"
+						type="radio"
+						value="transparent"
+						bind:group={currentColor}
+					/>
+					<label for="radio-transparent" class="swatch ml-1 rounded-full" style:--color="white">
+						<span class="sr-only">transparent</span>
+					</label>
 					<button class="leading-none h-8 p-2 w-8 bg-slate-500" on:click={toggleDrawer}>
 						{drawerLabel}
 					</button>
@@ -236,11 +242,15 @@
 	}
 
 	.swatch {
-		@apply w-8 h-8 p-2;
+		@apply w-8 h-8 p-2 inline-block cursor-pointer;
 		background-color: var(--color);
 	}
 
-	.swatch.current {
+	input:checked + .swatch {
 		@apply outline outline-red-600;
+	}
+
+	input:focus-visible + .swatch {
+		@apply outline;
 	}
 </style>
