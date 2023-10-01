@@ -14,7 +14,7 @@
 		<a href="/TODO" class="mt-28">View Help</a>
 	</div>
 	{#each wings as wing, i}
-		<div class="wing wing-{i+1}">
+		<div class="wing wing-{i + 1}">
 			{#if $gameScore >= wing.unlockReq}
 				<div class="flex align-top ml-11">
 					{#each wing.paintings as painting}
@@ -22,8 +22,8 @@
 							<a href="/view/painting?painting={painting}" class="painting">
 								<img src={$gameState.finishedPaintings[painting].image} alt={painting} />
 							</a>
-							{:else}
-							<a class="painting p-2 " href="/create/select?wing={i}">New</a>
+						{:else}
+							<a class="painting p-2" href="/create/select?wing={i}">New</a>
 						{/if}
 					{/each}
 					<a class="painting p-2" href="/create/select?wing={i}">New</a>
@@ -61,8 +61,7 @@
 		height: 282px;
 		width: 432px;
 		padding: 18px 32px;
-		z-index: -10;
-		margin-top:20px;
+		margin-top: 20px;
 	}
 
 	.wing-1 {
@@ -75,12 +74,12 @@
 
 	.wing-3 {
 		background-image: url('/sprites/wing-3.png');
-		margin-top:-180px;
+		margin-top: -180px;
 	}
 
 	.wing-4 {
 		background-image: url('/sprites/wing-4.png');
-		margin-top:-180px;
+		margin-top: -180px;
 	}
 
 	.painting {
