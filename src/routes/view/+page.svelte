@@ -23,7 +23,7 @@
 								<img src={$gameState.finishedPaintings[painting].image} alt={painting} />
 							</a>
 							{:else}
-							<a class="painting p-2 " href="/create/select?wing={i}">New</a>
+							<a class="painting p-2" href="/create/select?wing={i}">New</a>
 						{/if}
 					{/each}
 					<a class="painting p-2" href="/create/select?wing={i}">New</a>
@@ -54,6 +54,7 @@
 		grid-column: 2;
 		height: 840px;
 		width: 264px;
+		z-index: 10;
 	}
 
 	.wing {
@@ -61,7 +62,6 @@
 		height: 282px;
 		width: 432px;
 		padding: 18px 32px;
-		z-index: -10;
 		margin-top:20px;
 	}
 
@@ -87,12 +87,12 @@
 		@apply inline-block w-auto mt-0.5;
 		height: 80px;
 		border: 2px #819796 solid;
-		background-color: #c7cfcc;
 		margin-right: 36px;
 	}
 
 	.painting img {
 		max-width: unset;
+		background-color: #c7cfcc;
 		height: 100%;
 	}
 
