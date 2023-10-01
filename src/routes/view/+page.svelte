@@ -1,61 +1,84 @@
 <script lang="ts">
-	import { paintings, wings } from '$lib/data';
+	import { wings } from '$lib/data';
 	import { gameState, gameScore } from '$lib/gameState';
 </script>
 
-<div class="bg-gray-900 w-screen h-screen absolute -z-10">
-
-	<div class="flex">
-	<img src="/sprites/museum.png" alt="museum overhead view" class=""/>
-	<img src="/sprites/closed-wing-2.png" alt="museum overhead view" class="absolute w-min"/>
-	<img src="/sprites/closed-wing-3.png" alt="museum overhead view" class="absolute w-min"/>
-	<img src="/sprites/closed-wing-4.png" alt="museum overhead view" class="absolute w-min"/>
+<div class="museum">
+	<div class="lobby">
+		<h2>Lobby</h2>
+		<span>Total points: {$gameScore}</span>
+		<a href="/TODO">go to hall of fame</a>
+		<a href="/TODO">view credits</a>
+		<a href="/TODO">view help</a>
 	</div>
-
+	{#each wings as wing, i}
+		<div class="wing">
+			{#if $gameScore >= wing.unlockReq}
+				<div class="flex align-top justify-evenly">
+					{#each wing.paintings as painting}
+						{#if $gameState.finishedPaintings[painting]}
+							<a href="/view/painting?painting={painting}" class="painting">
+								<img src={$gameState.finishedPaintings[painting].image} alt={painting} />
+							</a>
+						{/if}
+					{/each}
+					<a class="painting p-2" href="/create/select?wing={i}">New</a>
+				</div>
+				<h2 class="w-full text-center text-2xl">{wing.name}</h2>
+			{:else}
+				<div class="closed-content">
+					<span>Closed</span>
+					<h2>{wing.name}</h2>
+					<span>Unlocks at {wing.unlockReq} points</span>
+				</div>
+			{/if}
+		</div>
+	{/each}
 </div>
-
-<span>Total points: {$gameScore}</span>
-<h2 class="bm-page-title w-screen text-center">Lobby</h2>
-<div class="flex flex-col w-screen content-center justify-start gap-8 h-screen">
-
-	<div class="flex flex-row w-screen">
-		{#each wings as wing, i}
-			<div class="wing flex flex-col w-1/2 flex-shrink-0" class:open={$gameScore >= wing.unlockReq}>
-				{#if $gameScore >= wing.unlockReq}
-					<div class="flex flex-row w-full gap-4 mb-8 justify-center">
-						{#each wing.paintings as painting}
-							{#if $gameState.finishedPaintings[painting]}
-								<a href="/view/painting?painting={painting}" class="painting">
-									<img src={$gameState.finishedPaintings[painting].image} alt={painting} />
-								</a>
-							{/if}
-						{/each}
-						<a href="/create/select?wing={i}">New</a>
-					</div>
-				<h2 class="bm-page-title self-center">{wing.name}</h2>
-				{:else}
-				<span class="text-xl self-center">Closed</span>
-				<h2 class="bm-page-title self-center">{wing.name}</h2>
-				<span class="self-center">Unlocks at {wing.unlockReq} points</span>
-				{/if}
-			</div>
-		{/each}
-	</div>
-	<div class="flex flex-col">
-		<a href="/TODO" class="w-screen text-center">go to hall of fame</a>
-		<a href="/TODO" class="w-screen text-center">view credits</a>
-		<a href="/TODO" class="w-screen text-center">view help</a>
-	</div>
-</div>
-
-
 
 <style>
+	.museum {
+		@apply grid grid-flow-dense;
+		grid-template-columns: repeat(3, minmax(0, max-content));
+	}
+
+	.lobby {
+		@apply bg-no-repeat row-span-2
+			flex flex-col;
+		background-image: url('/sprites/lobby.png');
+		grid-column: 2;
+		height: 840px;
+		width: 264px;
+	}
+
 	.wing {
-		@apply p-4;
+		@apply p-4 bg-no-repeat relative;
+		background-image: url('/sprites/wing.png');
+		height: 282px;
+		width: 432px;
+		padding: 18px 32px;
+	}
+
+	.wing:nth-child(odd) {
+		background-image: url('/sprites/wing_flipped.png');
 	}
 
 	.painting {
-		@apply w-16 h-auto border border-black;
+		@apply inline-block w-auto mt-0.5;
+		height: 80px;
+		border: 2px #819796 solid;
+		background-color: #c7cfcc;
+	}
+
+	.painting img {
+		max-width: unset;
+		height: 100%;
+	}
+
+	.closed-content {
+		@apply absolute top-0 left-0 w-full h-full
+			backdrop-grayscale backdrop-brightness-50
+			flex items-center justify-center flex-col
+			text-white;
 	}
 </style>
