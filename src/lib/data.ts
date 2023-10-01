@@ -23,6 +23,18 @@ export const wings: Wing[] = [
 		unlockReq: 100,
 		paintings: []
 	}
+	,
+	{
+		name: 'Wing 3',
+		unlockReq: 200,
+		paintings: []
+	}
+	,
+	{
+		name: 'Wing 4',
+		unlockReq: 300,
+		paintings: []
+	}
 ];
 
 export const paintings: Record<string, Painting> = {
