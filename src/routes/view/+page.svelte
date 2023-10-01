@@ -1,6 +1,10 @@
 <script lang="ts">
+	import Modal from '$lib/Modal.svelte';
 	import { wings } from '$lib/data';
 	import { gameState, gameScore } from '$lib/gameState';
+
+	let creditsModalOpen = false;
+	let helpModalOpen = false;
 </script>
 
 <div class="museum">
@@ -10,7 +14,7 @@
 			<div class="text-center w-100 text-white">Total points: {$gameScore}</div>
 		</div>
 		<a href="/TODO" class="mt-28">Hall of Fame</a>
-		<a href="/TODO" class="mt-48">View Credits</a>
+		<button class="mt-48" on:click={() => (creditsModalOpen = true)}>View Credits</button>
 		<a href="/TODO" class="mt-28">View Help</a>
 	</div>
 	{#each wings as wing, i}
@@ -39,6 +43,16 @@
 		</div>
 	{/each}
 </div>
+
+<Modal bind:open={creditsModalOpen}>
+	<div slot="title">Credits</div>
+	<div slot="body">foo</div>
+</Modal>
+
+<Modal bind:open={helpModalOpen}>
+	<div slot="title">Help</div>
+	<div slot="body">bar</div>
+</Modal>
 
 <style>
 	.museum {
