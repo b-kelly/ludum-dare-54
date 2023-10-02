@@ -89,7 +89,7 @@
 					style:--width={cWidth}
 				/>
 			</Grid>
-			<a class="h-12 text-sm" target=”_blank” href="{currentPainting.sourceUrl}">Open in new tab -></a>
+			<a class="h-12 text-sm" target=”_blank” href="{currentPainting.sourceUrl}">Open in new tab &#8680;</a>
 			</div>
 		</div>
 
@@ -150,9 +150,9 @@
 						on:click={() => (isDrawerOpen = !isDrawerOpen)}
 					>
 						{#if isDrawerOpen}
-							<span>^</span>
+							<span>&#8679;</span>
 						{:else}
-							<span>v</span>
+							<span>&#8681;</span>
 						{/if}
 					</button>
 				</div>

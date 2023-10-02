@@ -28,7 +28,7 @@
 	<div class="md:-ml-36">
 		<div class="flex flex-col gap-1 min-w-max max-w-sm">
 			<img src={playerPainting.image} alt={painting} class="bg-canvas-bg p-2 self-center" />
-			<div class="bg-yellow-600 text-white text-center">
+			<div class="bg-yellow-600 text-white text-center px-2">
 				{paintings[painting].bugName} - adapted by Bug
 			</div>
 			<div class="bg-yellow-700 text-white text-center">
