@@ -64,7 +64,7 @@
 
 {#if step === 'create'}
 	<div class="create-container">
-		<div class="p-6 flex flex-col h-screen justify-between">
+		<div class="reference-image">
 			<Grid dimensions={currentPainting} multiplier={MULT} disabled>
 				<img
 					class="half-painting min-w-max"
@@ -74,7 +74,6 @@
 					style:--width={cWidth}
 				/>
 			</Grid>
-			<img src="/sprites/bug.png" class="min-w-max hidden md:block" alt="bug artiste" />
 		</div>
 
 		<div class="easel">
@@ -200,10 +199,10 @@
 	/>
 {/if}
 
-<style>
+<style lang="postcss">
 	.create-container {
-		@apply bg-cover bg-no-repeat flex flex-row select-none;
-		background-image: url('/sprites/background-paint.png');
+		@apply bg-cover flex flex-col md:flex-row select-none w-full min-h-screen;
+		background-image: url('/sprites/background-review.png');
 	}
 
 	.easel {
@@ -216,12 +215,22 @@
 		@apply p-2 border-b-4 bg-[#ad7757] border-b-[#7A4841];
 	}
 
+	.reference-image {
+		@apply bg-no-repeat bg-contain
+			flex pt-10 justify-center;
+		background-position: top left, bottom left;
+		background-image: url('/sprites/bubble.png'), url('/sprites/bug.png');
+		min-height: 268px;
+		min-width: 284px;
+	}
+
 	.full-painting {
 		width: calc(var(--width) * 1px);
 		height: calc(var(--height) * 1px);
 	}
 
 	.half-painting {
+		@apply rounded-sm;
 		width: calc(var(--width) * 0.5px);
 		height: calc(var(--height) * 0.5px);
 	}
