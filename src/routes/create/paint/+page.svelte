@@ -79,6 +79,7 @@
 {#if step === 'create'}
 	<div class="create-container">
 		<div class="reference-image bg-none md:bg-bubble">
+			<div>
 			<Grid dimensions={currentPainting} multiplier={MULT} disabled>
 				<img
 					class="half-painting min-w-max"
@@ -88,6 +89,8 @@
 					style:--width={cWidth}
 				/>
 			</Grid>
+			<a class="h-12 text-sm" target=”_blank” href="{currentPainting.sourceUrl}">Open in new tab -></a>
+			</div>
 		</div>
 
 		<div class="easel">
