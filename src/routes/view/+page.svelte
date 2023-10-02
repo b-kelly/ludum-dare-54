@@ -7,37 +7,38 @@
 	let helpModalOpen = false;
 </script>
 
-<div class="museum h-screen">
+<div class="museum">
 	<div class="lobby text-2xl px-8">
 		<div>
 			<h2 class="font-headings text-white text-center mt-28">Lobby</h2>
 			<div class="text-center w-100 text-white">Total points: {$gameScore}</div>
 		</div>
-		<a href="/TODO" class="mt-28">Hall of Fame</a>
+		<span class="mt-28 p-1">&nbsp;</span><!-- TODO HACK -->
 		<button class="mt-48" on:click={() => (creditsModalOpen = true)}>View Credits</button>
 		<button class="mt-28" on:click={() => (helpModalOpen = true)}>View Help</button>
 	</div>
 	{#each wings as wing, i}
 		<div class="wing wing-{i + 1}">
 			{#if $gameScore >= wing.unlockReq}
-				<div class="flex align-top {i == 0 || i == 2 ? 'ml-11' : 'ml-1'}">
+				<div class="paintings">
 					{#each wing.paintings as painting}
 						{#if $gameState.finishedPaintings[painting]}
 							<a href="/view/painting?painting={painting}" class="painting">
 								<img src={$gameState.finishedPaintings[painting].image} alt={painting} />
 							</a>
 						{:else}
-							<a class="painting p-2" href="/create/select?wing={i}">New</a>
+							<a class="painting" href="/create/select?wing={i}">
+								<span class="placeholder">?</span>
+							</a>
 						{/if}
 					{/each}
-					<a class="painting p-2" href="/create/select?wing={i}">New</a>
 				</div>
 				<h2 class="w-full mt-24 text-center font-headings text-3xl text-white">{wing.name}</h2>
 			{:else}
 				<div class="closed-content">
-					<span class="text-4xl">Closed</span>
-					<h2 class="font-headings text-3xl">{wing.name}</h2>
+					<span class="text-4xl mt-20">Closed</span>
 					<span>Unlocks at {wing.unlockReq} points</span>
+					<h2 class="font-headings text-3xl mt-4">{wing.name}</h2>
 				</div>
 			{/if}
 		</div>
@@ -74,11 +75,18 @@
 	}
 
 	.wing {
-		@apply bg-no-repeat relative;
+		@apply bg-no-repeat relative py-[16px];
 		min-height: 282px;
 		width: 432px;
-		padding: 18px 32px;
 		margin-top: 20px;
+	}
+
+	.paintings {
+		@apply flex gap-3 pl-6;
+	}
+
+	.wing:nth-child(even) .paintings {
+		@apply pl-[60px];
 	}
 
 	.wing-1 {
@@ -98,16 +106,21 @@
 	}
 
 	.painting {
-		@apply inline-block w-auto mt-0.5;
-		height: 80px;
-		border: 2px #819796 solid;
-		margin-right: 36px;
+		@apply inline-flex w-auto mt-0.5
+			items-center justify-center
+			border-none rounded-none bg-transparent
+			hover:bg-slate-500;
+		height: 84px;
+		width: 78px;
 	}
 
-	.painting img {
-		max-width: unset;
-		background-color: #c7cfcc;
-		height: 100%;
+	.painting img,
+	.painting .placeholder {
+		@apply w-auto h-full max-w-full inline-block border-2 bg-white border-yellow-600;
+	}
+
+	.painting .placeholder {
+		@apply bg-slate-700 w-full text-5xl leading-none flex flex-col items-center justify-center;
 	}
 
 	.closed-content {

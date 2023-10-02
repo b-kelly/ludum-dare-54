@@ -22,7 +22,7 @@
 	}
 </script>
 
-<div class="container">
+<div class="score-container">
 	<img src="/sprites/bug.png" class="self-end mb-4 ml-4 hidden lg:block" alt="bug artiste" />
 
 	<div class="">
@@ -57,7 +57,7 @@
 </div>
 
 <style lang="postcss">
-	.container {
+	.score-container {
 		@apply bg-museum-review bg-cover bg-no-repeat
 			flex flex-col md:flex-row gap-8 min-h-screen pt-8 px-4;
 	}

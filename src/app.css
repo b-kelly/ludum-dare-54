@@ -16,7 +16,13 @@
 	button,
 	a:where([href]) {
 		@apply text-white bg-slate-500 border rounded py-1 px-2
-            hover:bg-slate-700;
+            hover:bg-slate-700 text-center;
+	}
+}
+
+@layer components {
+	.container {
+		@apply w-full max-w-screen-lg mx-auto;
 	}
 }
 
