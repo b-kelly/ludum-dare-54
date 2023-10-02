@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { paintings, type Painting } from '$lib/data';
 	import { gameState } from '$lib/gameState';
 	import { onMount } from 'svelte';
@@ -8,7 +7,7 @@
 	import Canvas from '$lib/Canvas.svelte';
 	import Grid from '$lib/Grid.svelte';
 	import DebugOnly from '$lib/DebugOnly.svelte';
-	import { scoreImage, getCriticReview } from '$lib/image';
+	import { scoreImage } from '$lib/image';
 	import ScoreView from '$lib/ScoreView.svelte';
 
 	export let data: PageData;
@@ -59,12 +58,12 @@
 	}
 
 	function eraseCanvas() {
-		//TODO: implement canvas clear
+		canvas.clear();
 	}
 </script>
 
 {#if step === 'create'}
-	<div class="bg-museum-paint bg-cover bg-no-repeat flex flex-row select-none">
+	<div class="create-container">
 		<div class="p-6 flex flex-col h-screen justify-between">
 			<Grid dimensions={currentPainting} multiplier={MULT} disabled>
 				<img
@@ -103,7 +102,7 @@
 			</Grid>
 
 			<div class="p-2 bg-easel-fore border-b-4 border-b-easel-back">
-				<div class="flex gap-1">
+				<div class="flex items-center justify-center gap-1">
 					{#each currentPainting.palette as color}
 						<div>
 							<input
@@ -127,7 +126,7 @@
 							bind:group={currentColor}
 						/>
 						<label for="radio-transparent" class="swatch" style:--color="white">
-							<span class="sr-only">transparent</span>
+							<span class="sr-only">erase</span>
 						</label>
 					</div>
 					<button
@@ -142,8 +141,8 @@
 					</button>
 				</div>
 				{#if isDrawerOpen}
-					<div class="mt-2 text-sm flex gap-2 justify-evenly content-center">
-						<button class="bg-red-500" on:click={() => eraseCanvas}>Clear all tiles</button>
+					<div class="mt-2 text-sm flex gap-2 items-center justify-center">
+						<button class="bg-red-500" on:click={eraseCanvas}>Clear all tiles</button>
 						<div>Brush size:</div>
 						{#each brushSizes as brush}
 							<div>
@@ -202,6 +201,11 @@
 {/if}
 
 <style>
+	.create-container {
+		@apply bg-cover bg-no-repeat flex flex-row select-none;
+		background-image: url('/sprites/background-paint.png');
+	}
+
 	.easel {
 		@apply bg-no-repeat bg-bottom
 			flex flex-col gap-2 items-center justify-end pb-16;

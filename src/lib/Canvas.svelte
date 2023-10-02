@@ -17,16 +17,7 @@
 	}
 
 	export function redraw() {
-		const ctx = canvas?.getContext('2d');
-
-		if (!ctx) {
-			throw 'TODO No canvas context';
-		}
-
-		// ensure crisp lines for hidpi screens with partial scaling
-		canvas.height = cHeight * devicePixelRatio;
-		canvas.width = cWidth * devicePixelRatio;
-		ctx.scale(devicePixelRatio, devicePixelRatio);
+		const ctx = getCanvasCtx();
 
 		function dragAndDraw(e: MouseEvent) {
 			fillColor(ctx, e.offsetX, e.offsetY);
@@ -50,9 +41,29 @@
 		}
 	}
 
+	export function clear() {
+		const ctx = getCanvasCtx();
+		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+	}
+
 	onMount(() => {
 		redraw();
 	});
+
+	function getCanvasCtx() {
+		const ctx = canvas?.getContext('2d');
+
+		if (!ctx) {
+			throw 'TODO No canvas context';
+		}
+
+		// ensure crisp lines for hidpi screens with partial scaling
+		canvas.height = cHeight * devicePixelRatio;
+		canvas.width = cWidth * devicePixelRatio;
+		ctx.scale(devicePixelRatio, devicePixelRatio);
+
+		return ctx;
+	}
 
 	function fillColor(ctx: CanvasRenderingContext2D | null, x: number, y: number) {
 		if (!ctx) {
