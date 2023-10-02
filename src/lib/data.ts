@@ -72,7 +72,7 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'Man Portrait with a Yummy Hat',
 		height: 20,
 		width: 16,
-		palette: ['#a1b2c3']
+		palette: ['#ba9960', '#977454', '#b2a28c', '#706659', '#827c82', '#7c8371', '#747784']
 	},
 	'young-woman-bird': {
 		id: 'young-woman-bird',
@@ -87,7 +87,7 @@ export const paintings: Record<string, Painting> = {
 		id: 'portrait-man',
 		name: 'Portrait of a Man',
 		artist: 'Domenico Ghirlandaio',
-		bugName: 'Portrait of a ladybug',
+		bugName: 'Portrait by a Mantis',
 		height: 20,
 		width: 16,
 		palette: ['#35501a', '#515424', '#372922', '#b4885f', '#9f6a40', '#632121', '#a7241b']
@@ -96,19 +96,19 @@ export const paintings: Record<string, Painting> = {
 		id: 'crow-and-willow',
 		name: 'Crow and Willow Tree',
 		artist: 'Kawanabe Kyōsai',
-		bugName: 'AHH! BIRD! and Willow Tree',
+		bugName: 'Cowering in Willow Tree',
 		height: 22,
 		width: 16,
-		palette: ['#a1b2c3']
+		palette: ['#89786d', '#98897a', '#a99989', '#4d443c', '#c2af92', '#2e2824']
 	},
 	'under-the-wave': {
 		id: 'under-the-wave',
 		name: 'Under the Wave off Kanagawa',
 		artist: 'Katsushika Hokusai',
-		bugName: 'I Am Not a Water Bug',
-		height: 17,
-		width: 24,
-		palette: ['#a1b2c3']
+		bugName: 'I Am Not a Watabuga',
+		height: 16,
+		width: 23,
+		palette: ['#c2b9a4', '#ddccae', '#908879', '#304359', '#768990']
 	},
 	'sunday-grande-jatte': {
 		id: 'sunday-grande-jatte',
@@ -117,16 +117,25 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'A Sunday with La Grass Hopper',
 		height: 16,
 		width: 24,
-		palette: ['#a1b2c3']
+		palette: ['#798890', '#9b9b98', '#7a826e', '#5a605b', '#8b7368', '#727884', '#989269']
 	},
 	'mada-primavesi': {
 		id: 'mada-primavesi',
 		name: 'Mäda Primavesi',
 		artist: 'Gustav Klimt',
-		bugName: 'Springtime Flower Girl',
-		height: 23,
-		width: 18,
-		palette: ['#a1b2c3']
+		bugName: 'Major Pollen Vestige',
+		height: 22,
+		width: 16,
+		palette: [
+			'#b7aaac',
+			'#9d779e',
+			'#5e5e5c',
+			'#666d92',
+			'#6c9792',
+			'#6c9792',
+			'#4e8b78',
+			'#5e5e5c'
+		]
 	},
 	'two-women': {
 		id: 'two-women',
@@ -135,22 +144,31 @@ export const paintings: Record<string, Painting> = {
 		bugName: 'Two Women and some Tasty Fruit',
 		height: 16,
 		width: 20,
-		palette: ['#a1b2c3']
+		palette: ['#9fa2a3', '#667691', '#1b2620', '#514c1d', '#7a8838', '#ac5e15']
 	},
 	'parliament-sunset': {
 		id: 'parliament-sunset',
 		name: 'The Houses of Parliament, Sunset',
 		artist: 'Claude Monet',
-		bugName: 'This is so hard',
+		bugName: 'The Houses of Parsley and Mint, Sunset',
 		height: 20,
 		width: 23,
-		palette: ['#a1b2c3']
+		palette: [
+			'#b4aa9e',
+			'#547891',
+			'#658b9e',
+			'#b99a78',
+			'#977d8a',
+			'#5c6f78',
+			'#658b9e',
+			'#68877c'
+		]
 	},
 	'margaret-austria': {
 		id: 'margaret-austria',
 		name: 'Margaret of Austria',
 		artist: 'Jean Hey',
-		bugName: 'Margaret Far Away',
+		bugName: 'Marmalade Far Away',
 		height: 23,
 		width: 16,
 		palette: ['#748571', '#91603a', '#2a0f08', '#617e85', '#738d8e', '#9d8e59', '#c5bbad']
@@ -160,12 +178,14 @@ export const paintings: Record<string, Painting> = {
 export const reviews: Review[] = [
 	{
 		scoreMax: 19,
-		content: "I'm not sure where the bug museum is getting its funding, but they're surely not using it.",
+		content:
+			"I'm not sure where the bug museum is getting its funding, but they're surely not using it.",
 		critic: 1
 	},
 	{
 		scoreMax: 39,
-		content: "I've seen better reproductions - much better... but then again, I've also seen worse...",
+		content:
+			"I've seen better reproductions - much better... but then again, I've also seen worse...",
 		critic: 2
 	},
 	{
@@ -175,12 +195,14 @@ export const reviews: Review[] = [
 	},
 	{
 		scoreMax: 79,
-		content: "Really solid reproduction - bugs will flock from all over (the backyard) to see this work!",
+		content:
+			'Really solid reproduction - bugs will flock from all over (the backyard) to see this work!',
 		critic: 4
 	},
 	{
 		scoreMax: 89,
-		content: "This museum has really outdone itself, producing a work of absolute grandeur and majesty. But, tiny.",
+		content:
+			'This museum has really outdone itself, producing a work of absolute grandeur and majesty. But, tiny.',
 		critic: 5
 	},
 	{
@@ -188,4 +210,4 @@ export const reviews: Review[] = [
 		content: "I've never seen work as beautiful as this. Dare I say... better than the original?!",
 		critic: 6
 	}
-]
+];
