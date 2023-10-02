@@ -209,11 +209,20 @@ export const paintings: Record<string, Painting> = {
 		id: 'woman-and-child',
 		name: 'Woman and Child',
 		artist: 'Kitagawa Utamaro',
-		bugName: 'Hope the Baby Doesn\'t Squash Me',
+		bugName: "Hope the Baby Doesn't Squash Me",
 		sourceUrl: 'https://www.metmuseum.org/art/collection/search/45020',
-		height: 25,
-		width: 17,
-		palette: ['#748571', '#91603a', '#2a0f08', '#617e85', '#738d8e', '#9d8e59', '#c5bbad']
+		height: 24,
+		width: 16,
+		palette: [
+			'#cbaa77',
+			'#d0ab78',
+			'#d1b088',
+			'#e8c98d',
+			'#616252',
+			'#7c806f',
+			'#baa588',
+			'#ad765d'
+		]
 	},
 	'double-flowered-cherry': {
 		id: 'double-flowered-cherry',
@@ -221,19 +230,28 @@ export const paintings: Record<string, Painting> = {
 		artist: 'Suzuki Harunobu',
 		bugName: 'Wait a minute, where are the cherries?',
 		sourceUrl: 'https://www.artic.edu/artworks/20994',
-		height: 20,
+		height: 22,
 		width: 16,
-		palette: ['#748571', '#91603a', '#2a0f08', '#617e85', '#738d8e', '#9d8e59', '#c5bbad']
+		palette: ['#d3b28f', '#9c7153', '#cd9b72', '#7f8050', '#ad996e', '#6d5c48', '#b5694b']
 	},
 	'girl-sailor-blouse': {
 		id: 'girl-sailor-blouse',
-		name: 'Girl in a Sailor\'s Blouse',
+		name: "Girl in a Sailor's Blouse",
 		artist: 'Amedeo Modigliani',
 		bugName: 'Girl in a Silly Blouse',
 		sourceUrl: 'https://www.metmuseum.org/art/collection/search/489102',
-		height: 22,
+		height: 23,
 		width: 16,
-		palette: ['#748571', '#91603a', '#2a0f08', '#617e85', '#738d8e', '#9d8e59', '#c5bbad']
+		palette: [
+			'#8c7754',
+			'#7a8475',
+			'#778b88',
+			'#6f7e81',
+			'#54544d',
+			'#989f8f',
+			'#b49d6f',
+			'#decdaa'
+		]
 	},
 	'haystacks-morning': {
 		id: 'haystacks-morning',
@@ -243,8 +261,17 @@ export const paintings: Record<string, Painting> = {
 		sourceUrl: 'https://www.metmuseum.org/art/collection/search/438738',
 		height: 16,
 		width: 20,
-		palette: ['#748571', '#91603a', '#2a0f08', '#617e85', '#738d8e', '#9d8e59', '#c5bbad']
-	},
+		palette: [
+			'#7b8b84',
+			'#b5b8ad',
+			'#546036',
+			'#7b8b84',
+			'#646a4a',
+			'#78844b',
+			'#334832',
+			'#8e774e'
+		]
+	}
 };
 
 export const reviews: Review[] = [
@@ -267,7 +294,8 @@ export const reviews: Review[] = [
 	},
 	{
 		scoreMax: 79,
-		content: "You were close! Really solid reproduction - bugs will flock from all over (the backyard) to see this work!",
+		content:
+			'You were close! Really solid reproduction - bugs will flock from all over (the backyard) to see this work!',
 		critic: 4
 	},
 	{
@@ -278,7 +306,8 @@ export const reviews: Review[] = [
 	},
 	{
 		scoreMax: 100,
-		content: "Wonderful! I've never seen work as beautiful as this. Dare I say... better than the original?!",
+		content:
+			"Wonderful! I've never seen work as beautiful as this. Dare I say... better than the original?!",
 		critic: 6
 	}
 ];
