@@ -30,17 +30,17 @@ export const wings: Wing[] = [
 	{
 		name: '(Post) Impressionist Wing',
 		unlockReq: 100,
-		paintings: ['straw-hat', 'young-woman-bird', 'sunday-grande-jatte']
+		paintings: ['straw-hat', 'young-woman-bird', 'sunday-grande-jatte', 'haystacks-morning']
 	},
 	{
 		name: 'Japanese Wing',
 		unlockReq: 200,
-		paintings: ['crow-and-willow', 'under-the-wave']
+		paintings: ['crow-and-willow', 'under-the-wave', 'woman-and-child', 'double-flowered-cherry']
 	},
 	{
 		name: '1900s-1940s Wing',
 		unlockReq: 300,
-		paintings: ['mada-primavesi', 'two-women', 'parliament-sunset']
+		paintings: ['mada-primavesi', 'two-women', 'parliament-sunset', 'girl-sailor-blouse']
 	}
 ];
 
@@ -204,7 +204,47 @@ export const paintings: Record<string, Painting> = {
 		height: 23,
 		width: 16,
 		palette: ['#748571', '#91603a', '#2a0f08', '#617e85', '#738d8e', '#9d8e59', '#c5bbad']
-	}
+	},
+	'woman-and-child': {
+		id: 'woman-and-child',
+		name: 'Woman and Child',
+		artist: 'Kitagawa Utamaro',
+		bugName: 'Hope the Baby Doesn\'t Squash Me',
+		sourceUrl: 'https://www.metmuseum.org/art/collection/search/45020',
+		height: 25,
+		width: 17,
+		palette: ['#748571', '#91603a', '#2a0f08', '#617e85', '#738d8e', '#9d8e59', '#c5bbad']
+	},
+	'double-flowered-cherry': {
+		id: 'double-flowered-cherry',
+		name: 'Double-Flowered Cherry: Motoura of the Minami Yamasakiya',
+		artist: 'Suzuki Harunobu',
+		bugName: 'Wait a minute, where are the cherries?',
+		sourceUrl: 'https://www.artic.edu/artworks/20994',
+		height: 20,
+		width: 16,
+		palette: ['#748571', '#91603a', '#2a0f08', '#617e85', '#738d8e', '#9d8e59', '#c5bbad']
+	},
+	'girl-sailor-blouse': {
+		id: 'girl-sailor-blouse',
+		name: 'Girl in a Sailor\'s Blouse',
+		artist: 'Amedeo Modigliani',
+		bugName: 'Girl in a Silly Blouse',
+		sourceUrl: 'https://www.metmuseum.org/art/collection/search/489102',
+		height: 22,
+		width: 16,
+		palette: ['#748571', '#91603a', '#2a0f08', '#617e85', '#738d8e', '#9d8e59', '#c5bbad']
+	},
+	'haystacks-morning': {
+		id: 'haystacks-morning',
+		name: 'Haystacks, Morning, Eragny',
+		artist: 'Camille Pissarro',
+		bugName: 'Bug Snacks, Morning, Backyard',
+		sourceUrl: 'https://www.metmuseum.org/art/collection/search/438738',
+		height: 16,
+		width: 20,
+		palette: ['#748571', '#91603a', '#2a0f08', '#617e85', '#738d8e', '#9d8e59', '#c5bbad']
+	},
 };
 
 export const reviews: Review[] = [
