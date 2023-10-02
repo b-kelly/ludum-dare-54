@@ -9,6 +9,7 @@
 	import Grid from '$lib/Grid.svelte';
 	import DebugOnly from '$lib/DebugOnly.svelte';
 	import { scoreImage, getCriticReview } from '$lib/image';
+	import ScoreView from '$lib/ScoreView.svelte';
 
 	export let data: PageData;
 
@@ -77,10 +78,6 @@
 	function eraseCanvas() {
 		//TODO: implement canvas clear
 	}
-
-	function fillEmptyTiles() {
-		//TODO: implement canvas fill (for only empty tiles)
-	}
 </script>
 
 {#if step === 'create'}
@@ -98,12 +95,11 @@
 			<img src="/sprites/bug.png" class="min-w-max hidden md:block" alt="bug artiste" />
 		</div>
 
-		<div class="pb-12">
-			<img src="/sprites/easel.png" alt="easel" class="absolute mt-12 z-0" />
+		<div class="easel">
 			<Grid
 				dimensions={currentPainting}
 				multiplier={MULT}
-				class="border border-gray-500 absolute mt-24 ml-12 bg-canvas-bg"
+				class="border border-gray-500 bg-canvas-bg"
 			>
 				<Canvas
 					bind:this={canvas}
@@ -123,7 +119,7 @@
 				/>
 			</Grid>
 
-			<div class="absolute mt-1 p-2 ml-2 bg-easel-fore border-b-4 border-b-easel-back">
+			<div class="p-2 bg-easel-fore border-b-4 border-b-easel-back">
 				<div class="flex gap-1">
 					{#each currentPainting.palette as color}
 						<div>
@@ -183,11 +179,7 @@
 				{/if}
 			</div>
 
-			<button
-				type="button"
-				class="absolute bottom-24 w-36 ml-24 bg-slate-700 text-white"
-				on:click={startScoring}>Submit</button
-			>
+			<button type="button" class="bg-slate-700 text-white" on:click={startScoring}>Submit</button>
 		</div>
 
 		<DebugOnly disabled>
@@ -219,36 +211,19 @@
 		</DebugOnly>
 	</div>
 {:else if step === 'scoring'}
-	<div class="bg-museum-review bg-cover bg-no-repeat flex flex-row gap-8 min-h-screen pt-8 px-4">
-		<img src="/sprites/bug.png" class="hidden md:block self-end mb-4 ml-4" alt="bug artiste" />
-
-		<div class="pb-12 ml-24 md:ml-0">
-			<div class="mt-36 sm:mt-16 flex flex-col">
-				<img src={finishedPainting} alt="finished painting" class="bg-canvas-bg p-2" />
-				<div class="bg-yellow-600 text-white p-1 mt-1 w100 text-center">
-					{currentPainting.bugName} - adapted by Bug
-				</div>
-
-				<button type="button" class="bg-slate-400 text-white mt-24" on:click={editPainting}>
-					Edit painting
-				</button>
-				<button type="button" class="bg-slate-700 text-white mt-4" on:click={savePainting}>
-					Hang in museum!
-				</button>
-			</div>
-		</div>
-
-		<div class="absolute top-0 w-screen sm:right-0 sm:top-24 p-2 sm:w-3/12 bg-critics text-white">
-			<div class="font-headings">Critics are saying:</div>
-			<div>"{getCriticReview(finalScore?.score || 0)}"</div>
-
-			<div>{finalScore?.match} / {finalScore?.total} pixels match</div>
-			<div>Score: {finalScore?.score || 0}</div>
-		</div>
-	</div>
+	<ScoreView
+		playerPainting={{ image: finishedPainting, score: finalScore?.score || 0 }}
+		painting={currentPainting.id}
+	/>
 {/if}
 
 <style>
+	.easel {
+		@apply bg-no-repeat bg-bottom
+			flex flex-col gap-2 items-center justify-end pb-16;
+		background-image: url('/sprites/easel.png');
+	}
+
 	.full-painting {
 		width: calc(var(--width) * 1px);
 		height: calc(var(--height) * 1px);
