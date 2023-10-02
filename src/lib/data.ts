@@ -24,7 +24,7 @@ export const wings: Wing[] = [
 	{
 		name: 'Renaissance Wing',
 		unlockReq: 0,
-		paintings: ['mona-lisa', 'portrait-man', 'margaret-austria']
+		paintings: ['mona-lisa', 'portrait-man', 'margaret-austria', 'rest-on-flight']
 	},
 	{
 		name: '(Post) Impressionist Wing',
@@ -63,6 +63,25 @@ export const paintings: Record<string, Painting> = {
 			'#c3bc81',
 			'#584e39',
 			'#c3bc81'
+		]
+	},
+	'rest-on-flight': {
+		id: 'rest-on-flight',
+		name: 'The Rest on the Flight into Egypt',
+		artist: 'Gerard David',
+		bugName: 'The Rest on the Flight Without Wings',
+		height: 21,
+		width: 16,
+		palette: [
+			'#bbc0bb',
+			'#6791a8',
+			'#4b433d',
+			'#7a846f',
+			'#af9362',
+			'#4b433d',
+			'#6791a8',
+			'#3f6296',
+			'#917a86'
 		]
 	},
 	'straw-hat': {
