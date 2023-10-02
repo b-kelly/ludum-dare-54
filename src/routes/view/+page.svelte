@@ -117,6 +117,7 @@
 	.painting img,
 	.painting .placeholder {
 		@apply w-auto h-full max-w-full inline-block border-2 bg-white border-yellow-600;
+		border-style: inset;
 	}
 
 	.painting .placeholder {
