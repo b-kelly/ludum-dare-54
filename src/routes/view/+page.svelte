@@ -98,13 +98,13 @@
 		grid-template-columns: repeat(3, minmax(auto, max-content));
 		grid-template-rows: 282px; /* TODO hardcoded */
 
-		background-image: url('../sprites/grass.png');
+		background-image: url('/sprites/grass.png');
 	}
 
 	.lobby {
 		@apply bg-no-repeat row-span-2
 			flex flex-col;
-		background-image: url('../sprites/lobby.png');
+		background-image: url('/sprites/lobby.png');
 		grid-column: 2;
 		min-height: 840px;
 		width: 264px;
@@ -126,19 +126,19 @@
 	}
 
 	.wing-1 {
-		background-image: url('../sprites/wing-1.png');
+		background-image: url('/sprites/wing-1.png');
 	}
 
 	.wing-2 {
-		background-image: url('../sprites/wing-2.png');
+		background-image: url('/sprites/wing-2.png');
 	}
 
 	.wing-3 {
-		background-image: url('../sprites/wing-3.png');
+		background-image: url('/sprites/wing-3.png');
 	}
 
 	.wing-4 {
-		background-image: url('../sprites/wing-4.png');
+		background-image: url('/sprites/wing-4.png');
 	}
 
 	.painting {

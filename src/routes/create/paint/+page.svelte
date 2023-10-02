@@ -231,13 +231,13 @@
 <style lang="postcss">
 	.create-container {
 		@apply bg-cover flex flex-col md:flex-row select-none w-full min-h-screen;
-		background-image: url('../../sprites/background-review.png');
+		background-image: url('/sprites/background-review.png');
 	}
 
 	.easel {
 		@apply bg-no-repeat bg-bottom
 			flex flex-col gap-2 items-center justify-end pb-16 mb-12;
-		background-image: url('../../sprites/easel.png');
+		background-image: url('/sprites/easel.png');
 	}
 
 	.tray {
@@ -278,7 +278,7 @@
 
 	@media (min-width: 768px) {
 		.md\:bg-bubble {
-			background-image: url('../../sprites/bubble.png'), url('../../sprites/bug.png');
+			background-image: url('/sprites/bubble.png'), url('/sprites/bug.png');
 		}
 	}
 </style>
