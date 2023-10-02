@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { paintings, type Painting } from '$lib/data';
+	import { paintings } from '$lib/data';
 	import { gameState, type FinishedPainting } from '$lib/gameState';
 	import { getCriticReview } from '$lib/image';
 
@@ -40,7 +40,7 @@
 	</div>
 
 	<div>
-		<div class="bg-critics text-white p-4">
+		<div class="bg-[#3C5E8B] text-white p-4">
 			<div class="font-headings">Critics are saying:</div>
 			<div>"{getCriticReview(playerPainting.score)}"</div>
 
@@ -58,7 +58,8 @@
 
 <style lang="postcss">
 	.score-container {
-		@apply bg-museum-review bg-cover bg-no-repeat
+		@apply bg-cover bg-no-repeat
 			flex flex-col md:flex-row gap-8 min-h-screen pt-8 px-4;
+		background-image: url('/sprites/background-review.png');
 	}
 </style>

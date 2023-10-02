@@ -101,7 +101,7 @@
 				/>
 			</Grid>
 
-			<div class="p-2 bg-easel-fore border-b-4 border-b-easel-back">
+			<div class="tray">
 				<div class="flex items-center justify-center gap-1">
 					{#each currentPainting.palette as color}
 						<div>
@@ -210,6 +210,10 @@
 		@apply bg-no-repeat bg-bottom
 			flex flex-col gap-2 items-center justify-end pb-16;
 		background-image: url('/sprites/easel.png');
+	}
+
+	.tray {
+		@apply p-2 border-b-4 bg-[#ad7757] border-b-[#7A4841];
 	}
 
 	.full-painting {
