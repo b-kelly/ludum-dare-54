@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { paintings, type Painting } from '$lib/data';
 	import { gameState } from '$lib/gameState';
 	import { onMount } from 'svelte';
@@ -8,7 +7,8 @@
 	import Canvas from '$lib/Canvas.svelte';
 	import Grid from '$lib/Grid.svelte';
 	import DebugOnly from '$lib/DebugOnly.svelte';
-	import { getPixels, loadImageAsync, scoreImage, getCriticReview } from '$lib/image';
+	import { scoreImage } from '$lib/image';
+	import ScoreView from '$lib/ScoreView.svelte';
 
 	export let data: PageData;
 
@@ -57,35 +57,14 @@
 		step = 'scoring';
 	}
 
-	function editPainting() {
-		step = 'create';
-	}
-
-	function savePainting() {
-		gameState.update((gs) => {
-			gs.finishedPaintings[currentPainting.id] = {
-				image: finishedPainting,
-				score: finalScore?.score || 0
-			};
-
-			return gs;
-		});
-
-		goto('/view');
-	}
-
 	function eraseCanvas() {
-		//TODO: implement canvas clear
-	}
-
-	function fillEmptyTiles() {
-		//TODO: implement canvas fill (for only empty tiles)
+		canvas.clear();
 	}
 </script>
 
 {#if step === 'create'}
-	<div class="bg-museum-paint bg-cover bg-no-repeat flex flex-row select-none">
-		<div class="p-6 flex flex-col h-screen justify-between">
+	<div class="create-container">
+		<div class="reference-image">
 			<Grid dimensions={currentPainting} multiplier={MULT} disabled>
 				<img
 					class="half-painting min-w-max"
@@ -95,15 +74,13 @@
 					style:--width={cWidth}
 				/>
 			</Grid>
-			<img src="/sprites/bug.png" class="min-w-max hidden md:block" alt="bug artiste" />
 		</div>
 
-		<div class="pb-12">
-			<img src="/sprites/easel.png" alt="easel" class="absolute mt-12 z-0" />
+		<div class="easel">
 			<Grid
 				dimensions={currentPainting}
 				multiplier={MULT}
-				class="border border-gray-500 absolute mt-24 ml-12 bg-canvas-bg"
+				class="border border-gray-500 bg-canvas-bg"
 			>
 				<Canvas
 					bind:this={canvas}
@@ -123,8 +100,8 @@
 				/>
 			</Grid>
 
-			<div class="absolute mt-1 p-2 ml-2 bg-easel-fore border-b-4 border-b-easel-back">
-				<div class="flex gap-1">
+			<div class="tray">
+				<div class="flex items-center justify-center gap-1">
 					{#each currentPainting.palette as color}
 						<div>
 							<input
@@ -148,7 +125,7 @@
 							bind:group={currentColor}
 						/>
 						<label for="radio-transparent" class="swatch" style:--color="white">
-							<span class="sr-only">transparent</span>
+							<span class="sr-only">erase</span>
 						</label>
 					</div>
 					<button
@@ -163,34 +140,30 @@
 					</button>
 				</div>
 				{#if isDrawerOpen}
-					<div class="mt-2 text-sm flex gap-2 justify-evenly content-center">
-							<button class="bg-red-500" on:click={() => eraseCanvas}>Clear all tiles</button>
-							<div>Brush size:</div>
-							{#each brushSizes as brush}
-								<div>
-									<input
-										id="radio-brush-{brush}"
-										type="radio"
-										value={brush}
-										bind:group={currentBrush}
-									/>
-									<label for="radio-brush-{brush}">
-										{brush}px
-									</label>
-								</div>
-							{/each}
-						</div>
+					<div class="mt-2 text-sm flex gap-2 items-center justify-center">
+						<button class="bg-red-500" on:click={eraseCanvas}>Clear all tiles</button>
+						<div>Brush size:</div>
+						{#each brushSizes as brush}
+							<div>
+								<input
+									id="radio-brush-{brush}"
+									type="radio"
+									value={brush}
+									bind:group={currentBrush}
+								/>
+								<label for="radio-brush-{brush}">
+									{brush}px
+								</label>
+							</div>
+						{/each}
+					</div>
 				{/if}
 			</div>
 
-			<button
-				type="button"
-				class="absolute bottom-24 w-36 ml-24 bg-slate-700 text-white"
-				on:click={startScoring}>Submit</button
-			>
+			<button type="button" class="bg-slate-700 text-white" on:click={startScoring}>Submit</button>
 		</div>
 
-		<DebugOnly>
+		<DebugOnly disabled>
 			<div>
 				<Grid dimensions={currentPainting} multiplier={MULT}>
 					<img
@@ -219,42 +192,45 @@
 		</DebugOnly>
 	</div>
 {:else if step === 'scoring'}
-	<div class="bg-museum-review bg-cover bg-no-repeat flex flex-row gap-8 min-h-screen pt-8 px-4">
-		<img src="/sprites/bug.png" class="hidden md:block self-end mb-4 ml-4" alt="bug artiste" />
-
-		<div class="pb-12 ml-24 md:ml-0">
-			<div class="mt-36 sm:mt-16 flex flex-col">
-				<img src={finishedPainting} alt="finished painting" class="bg-canvas-bg p-2" />
-				<div class="bg-yellow-600 text-white p-1 mt-1 w100 text-center">
-					{currentPainting.bugName} - adapted by Bug
-				</div>
-
-				<button type="button" class="bg-slate-400 text-white mt-24" on:click={editPainting}>
-					Edit painting
-				</button>
-				<button type="button" class="bg-slate-700 text-white mt-4" on:click={savePainting}>
-					Hang in museum!
-				</button>
-			</div>
-		</div>
-
-		<div class="absolute top-0 w-screen sm:right-0 sm:top-24 p-2 sm:w-3/12 bg-critics text-white">
-			<div class="font-headings">Critics are saying:</div>
-			<div>"{getCriticReview(finalScore?.score || 0)}"</div>
-
-			<div>{finalScore?.match} / {finalScore?.total} pixels match</div>
-			<div>Score: {finalScore?.score || 0}</div>
-		</div>
-	</div>
+	<ScoreView
+		playerPainting={{ image: finishedPainting, score: finalScore?.score || 0 }}
+		painting={currentPainting.id}
+		showSave
+	/>
 {/if}
 
-<style>
+<style lang="postcss">
+	.create-container {
+		@apply bg-cover flex flex-col md:flex-row select-none w-full min-h-screen;
+		background-image: url('/sprites/background-review.png');
+	}
+
+	.easel {
+		@apply bg-no-repeat bg-bottom
+			flex flex-col gap-2 items-center justify-end pb-16;
+		background-image: url('/sprites/easel.png');
+	}
+
+	.tray {
+		@apply p-2 border-b-4 bg-[#ad7757] border-b-[#7A4841];
+	}
+
+	.reference-image {
+		@apply bg-no-repeat bg-contain
+			flex pt-10 justify-center;
+		background-position: top left, bottom left;
+		background-image: url('/sprites/bubble.png'), url('/sprites/bug.png');
+		min-height: 268px;
+		min-width: 284px;
+	}
+
 	.full-painting {
 		width: calc(var(--width) * 1px);
 		height: calc(var(--height) * 1px);
 	}
 
 	.half-painting {
+		@apply rounded-sm;
 		width: calc(var(--width) * 0.5px);
 		height: calc(var(--height) * 0.5px);
 	}

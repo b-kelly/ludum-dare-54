@@ -1,9 +1,14 @@
 import { browser } from '$app/environment';
 import { derived, get, writable, type Writable } from 'svelte/store';
 
+export interface FinishedPainting {
+	image: string;
+	score: number;
+}
+
 export interface GameState {
 	userId: string;
-	finishedPaintings: Record<string, { image: string; score: number }>;
+	finishedPaintings: Record<string, FinishedPainting>;
 }
 
 function localStorageStore<T>(key: string, initial: T): Writable<T> {
