@@ -5,6 +5,14 @@
 
 	let creditsModalOpen = false;
 	let helpModalOpen = false;
+	let gameOverModalOpen = false;
+	let gameOverShownOnce = false;
+
+	if (Object.keys($gameState.finishedPaintings).length == 16 && !gameOverShownOnce) {
+		gameOverModalOpen = true;
+		gameOverShownOnce = true;
+	}
+
 </script>
 <div class="bg-grass h-screen">
 <div class="museum">
@@ -53,16 +61,30 @@
 </div>
 
 <Modal bind:open={creditsModalOpen}>
-	<div slot="title">Credits</div>
-	<div slot="body">
+	<div slot="title" class="font-headings text-4xl">Credits</div>
+	<div slot="body" class="flex flex-col gap-2">
 		<p>Art and music by <a target="_blank" href="https://kristinamay.itch.io">kristinamay</a></p>
 		<p>Code by bkelly</p>
+		<p>All paintings in the public domain via metmuseum.org, artic.edu, and nga.gov.</p>
 	</div>
 </Modal>
 
 <Modal bind:open={helpModalOpen}>
-	<div slot="title">Help</div>
-	<div slot="body">To view, edit, or create paintings, click on the paintings in each wing. (If you can't see the wings, your screen is too narrow! scroll down!)</div>
+	<div slot="title" class="font-headings text-4xl">Help</div>
+	<div slot="body">
+		<p>To view, edit, or create paintings, click on the paintings in each wing.</p>
+		<p>(If you can't see the wings, your screen is too narrow! scroll down or widen your screen!)
+	</div>
+</Modal>
+
+<Modal bind:open={gameOverModalOpen}>
+	<div slot="title" class="font-headings text-4xl">You did it!</div>
+	<div slot="body">
+		<p>You've successfully completed each of the paintings with a total combined score of {$gameScore}.</p>
+		<p>If you'd like, you can continue playing to try to raise your score!</p>
+		<p>And please, share your art with us in the comments!</p>
+		<p class="text-2xl mt-8">Thank you so much for playing our game!</p>
+	</div>
 </Modal>
 
 <style lang="postcss">
