@@ -1,10 +1,25 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { paintings, type Painting } from '$lib/data';
-	import type { FinishedPainting } from '$lib/gameState';
+	import { gameState, type FinishedPainting } from '$lib/gameState';
 	import { getCriticReview } from '$lib/image';
 
 	export let painting: string;
 	export let playerPainting: FinishedPainting;
+	export let showSave = false;
+
+	function savePainting() {
+		gameState.update((gs) => {
+			gs.finishedPaintings[painting] = {
+				image: playerPainting.image,
+				score: playerPainting.score
+			};
+
+			return gs;
+		});
+
+		goto('/view');
+	}
 </script>
 
 <div class="container">
@@ -32,7 +47,11 @@
 			<div>Score: {playerPainting.score || 0}</div>
 		</div>
 
-		<a href="/create/paint?painting={painting}">Edit Painting</a>
+		{#if showSave}
+			<button type="button" on:click={savePainting}>Save Painting</button>
+		{:else}
+			<a href="/create/paint?painting={painting}">Edit Painting</a>
+		{/if}
 		<a href="/view">Return to Museum</a>
 	</div>
 </div>

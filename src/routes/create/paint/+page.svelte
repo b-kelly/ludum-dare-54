@@ -58,23 +58,6 @@
 		step = 'scoring';
 	}
 
-	function editPainting() {
-		step = 'create';
-	}
-
-	function savePainting() {
-		gameState.update((gs) => {
-			gs.finishedPaintings[currentPainting.id] = {
-				image: finishedPainting,
-				score: finalScore?.score || 0
-			};
-
-			return gs;
-		});
-
-		goto('/view');
-	}
-
 	function eraseCanvas() {
 		//TODO: implement canvas clear
 	}
@@ -214,6 +197,7 @@
 	<ScoreView
 		playerPainting={{ image: finishedPainting, score: finalScore?.score || 0 }}
 		painting={currentPainting.id}
+		showSave
 	/>
 {/if}
 
