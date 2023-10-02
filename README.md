@@ -1,4 +1,4 @@
-# Ludem Dare 54 - Limited Space
+# Ludum Dare 54 - Limited Space
 
 ## Local development
 
