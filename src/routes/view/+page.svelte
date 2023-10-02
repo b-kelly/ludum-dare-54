@@ -14,14 +14,14 @@
 			<div class="text-center w-100 text-white">Total points: {$gameScore}</div>
 		</div>
 		<span class="mt-16 p-1">&nbsp;</span><!-- TODO HACK -->
-		<button class="" on:click={() => (creditsModalOpen = true)}>View Credits</button>
+		<button class="" on:click={() => (creditsModalOpen = true)}>Credits</button>
 		<div class="mt-8 w-3/4 self-center text-sm text-white">
 			Play some lobby tunes:
 			<audio class="w-full" controls src="/audio/song-5.mp3" loop>
 				<a href="/audio/song-5.mp3">background music</a>
 			</audio>
 		</div>
-		<button class="mt-28" on:click={() => (helpModalOpen = true)}>View Help</button>
+		<button class="mt-28" on:click={() => (helpModalOpen = true)}>Help</button>
 	</div>
 	{#each wings as wing, i}
 		<div class="wing wing-{i + 1}">
@@ -54,12 +54,15 @@
 
 <Modal bind:open={creditsModalOpen}>
 	<div slot="title">Credits</div>
-	<div slot="body">foo</div>
+	<div slot="body">
+		<p>Art and music by <a target="_blank" href="https://kristinamay.itch.io">kristinamay</a></p>
+		<p>Code by bkelly</p>
+	</div>
 </Modal>
 
 <Modal bind:open={helpModalOpen}>
 	<div slot="title">Help</div>
-	<div slot="body">bar</div>
+	<div slot="body">To view, edit, or create paintings, click on the paintings in each wing. (If you can't see the wings, your screen is too narrow! scroll down!)</div>
 </Modal>
 
 <style lang="postcss">

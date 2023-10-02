@@ -4,7 +4,7 @@
 
 @layer base {
 	body {
-		background-color: #a8b5b2;
+		background-color: rgb(51 65 85);
 		font-family: 'Quicksand', sans-serif;
 	}
 
