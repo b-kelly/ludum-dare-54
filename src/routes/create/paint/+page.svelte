@@ -15,6 +15,8 @@
 	let finishedPainting: string = '';
 	let finalScore: { match: number; total: number; score: number } | undefined;
 
+	let tuneNum = 1;
+
 	let step: 'create' | 'scoring' = 'create';
 	let currentPainting: Painting = paintings[data.painting];
 
@@ -60,11 +62,23 @@
 	function eraseCanvas() {
 		canvas.clear();
 	}
+
+	function nextSong() {
+		let audio = document.getElementById('audio') as HTMLAudioElement;
+		if (tuneNum >= 5) {
+			tuneNum = 1;
+		} else {
+			tuneNum++;
+		}
+		audio.src=`/audio/song-${tuneNum}.mp3`;
+		audio.play();
+	}
+
 </script>
 
 {#if step === 'create'}
 	<div class="create-container">
-		<div class="reference-image">
+		<div class="reference-image bg-none md:bg-bubble">
 			<Grid dimensions={currentPainting} multiplier={MULT} disabled>
 				<img
 					class="half-painting min-w-max"
@@ -100,7 +114,7 @@
 				/>
 			</Grid>
 
-			<div class="tray">
+			<div class="tray -mt-2">
 				<div class="flex items-center justify-center gap-1">
 					{#each currentPainting.palette as color}
 						<div>
@@ -199,6 +213,16 @@
 	/>
 {/if}
 
+<div class="w-full flex flex-col -mt-24">
+	<span class="self-center md:self-end mb4 mr-12 text-white text-lg">Play some painting tunes:</span>
+	<div class="flex self-center md:self-end">
+	<button class="mr-2" on:click={nextSong}>Shuffle</button>
+	<audio id="audio" class="w-64" controls src="/audio/song-{tuneNum}.mp3" loop>
+		<a href="/audio/song-{tuneNum}.mp3">background music</a>
+	</audio>
+</div>
+</div>
+
 <style lang="postcss">
 	.create-container {
 		@apply bg-cover flex flex-col md:flex-row select-none w-full min-h-screen;
@@ -207,7 +231,7 @@
 
 	.easel {
 		@apply bg-no-repeat bg-bottom
-			flex flex-col gap-2 items-center justify-end pb-16;
+			flex flex-col gap-2 items-center justify-end pb-16 mb-12;
 		background-image: url('/sprites/easel.png');
 	}
 
@@ -219,7 +243,6 @@
 		@apply bg-no-repeat bg-contain
 			flex pt-10 justify-center;
 		background-position: top left, bottom left;
-		background-image: url('/sprites/bubble.png'), url('/sprites/bug.png');
 		min-height: 268px;
 		min-width: 284px;
 	}

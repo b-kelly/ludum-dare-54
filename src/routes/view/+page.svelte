@@ -6,15 +6,21 @@
 	let creditsModalOpen = false;
 	let helpModalOpen = false;
 </script>
-
+<div class="bg-grass h-screen">
 <div class="museum">
 	<div class="lobby text-2xl px-8">
 		<div>
 			<h2 class="font-headings text-white text-center mt-28">Lobby</h2>
 			<div class="text-center w-100 text-white">Total points: {$gameScore}</div>
 		</div>
-		<span class="mt-28 p-1">&nbsp;</span><!-- TODO HACK -->
-		<button class="mt-48" on:click={() => (creditsModalOpen = true)}>View Credits</button>
+		<span class="mt-16 p-1">&nbsp;</span><!-- TODO HACK -->
+		<button class="" on:click={() => (creditsModalOpen = true)}>View Credits</button>
+		<div class="mt-8 w-3/4 self-center text-sm text-white">
+			Play some lobby tunes:
+			<audio class="w-full" controls src="/audio/song-5.mp3" loop>
+				<a href="/audio/song-5.mp3">background music</a>
+			</audio>
+		</div>
 		<button class="mt-28" on:click={() => (helpModalOpen = true)}>View Help</button>
 	</div>
 	{#each wings as wing, i}
@@ -43,6 +49,7 @@
 			{/if}
 		</div>
 	{/each}
+</div>
 </div>
 
 <Modal bind:open={creditsModalOpen}>

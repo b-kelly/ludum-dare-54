@@ -23,11 +23,11 @@
 </script>
 
 <div class="score-container">
-	<img src="/sprites/bug.png" class="self-end mb-4 ml-4 hidden lg:block" alt="bug artiste" />
+	<img src="/sprites/bug.png" class="self-end mb-4 ml-4 hidden md:block" alt="bug artiste" />
 
-	<div class="">
-		<div class="flex flex-col gap-1">
-			<img src={playerPainting.image} alt={painting} class="bg-canvas-bg p-2" />
+	<div class="md:-ml-36">
+		<div class="flex flex-col gap-1 min-w-max max-w-sm">
+			<img src={playerPainting.image} alt={painting} class="bg-canvas-bg p-2 self-center" />
 			<div class="bg-yellow-600 text-white text-center">
 				{paintings[painting].bugName} - adapted by Bug
 			</div>
@@ -47,12 +47,14 @@
 			<div>Score: {playerPainting.score || 0}</div>
 		</div>
 
-		{#if showSave}
-			<button type="button" on:click={savePainting}>Save Painting</button>
-		{:else}
-			<a href="/create/paint?painting={painting}">Edit Painting</a>
-		{/if}
-		<a href="/view">Return to Museum</a>
+		<div class="flex flex-col mt-2 gap-1">
+			{#if showSave}
+				<button type="button" class="bg-slate-800" on:click={savePainting}>Save Painting</button>
+			{:else}
+				<a href="/create/paint?painting={painting}">Edit Painting</a>
+				<a href="/view">Return to Museum</a>
+			{/if}
+		</div>
 	</div>
 </div>
 
