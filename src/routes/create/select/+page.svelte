@@ -11,7 +11,7 @@
 <div
 	class="bg-slate-900 text-white flex flex-col bg-bug bg-no-repeat bg-left-bottom gap-4 p-12 w-full max-w-screen-lg mx-auto"
 >
-	<h1 class="bm-page-title mb-4 text-center">
+	<h1 class="text-2xl mb-4 text-center">
 		Which painting would you like to recreate for your museum?
 	</h1>
 

@@ -4,13 +4,8 @@
 
 @layer base {
 	body {
-		background-color: #A8B5B2;
+		background-color: #a8b5b2;
 		font-family: 'Quicksand', sans-serif;
-	}
-
-	a[href] {
-		@apply text-white bg-slate-500 border rounded py-1
-		hover:bg-slate-700 hover:text-blue-200 text-center;
 	}
 
 	input[type='text'] {
@@ -18,15 +13,10 @@
             focus-visible:outline;
 	}
 
-	button {
+	button,
+	a:where([href]) {
 		@apply text-white bg-slate-500 border rounded py-1 px-2
             hover:bg-slate-700;
-	}
-}
-
-@layer components {
-	.bm-page-title {
-		@apply text-2xl;
 	}
 }
 

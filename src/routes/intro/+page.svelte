@@ -1,7 +1,7 @@
 <div
 	class="bg-slate-700 text-white h-screen w-screen flex flex-col justify-center content-center gap-8 mx-auto max-w-screen-lg px-4 text-center"
 >
-	<h1 class="bm-page-title text-center text-4xl font-headings">Welcome to your new museum!</h1>
+	<h1 class="text-center text-4xl font-headings">Welcome to your new museum!</h1>
 	<p>
 		As a very well-traveled bug, you've long lamented the lack of beautiful art available to you and
 		your fellow bugs.
