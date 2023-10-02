@@ -70,26 +70,25 @@
 		} else {
 			tuneNum++;
 		}
-		audio.src=`/audio/song-${tuneNum}.mp3`;
+		audio.src = `/audio/song-${tuneNum}.mp3`;
 		audio.play();
 	}
-
 </script>
 
 {#if step === 'create'}
 	<div class="create-container">
 		<div class="reference-image bg-none md:bg-bubble">
 			<div>
-			<Grid dimensions={currentPainting} multiplier={MULT} disabled>
-				<img
-					class="half-painting min-w-max"
-					src="/paintings/{currentPainting.id}_full.jpg"
-					alt={currentPainting.name}
-					style:--height={cHeight}
-					style:--width={cWidth}
-				/>
-			</Grid>
-			<a class="h-12 text-sm" target=”_blank” href="{currentPainting.sourceUrl}">Open in new tab &#8680;</a>
+				<Grid dimensions={currentPainting} multiplier={MULT} disabled>
+					<img
+						class="half-painting min-w-max"
+						src="../../paintings/{currentPainting.id}_full.jpg"
+						alt={currentPainting.name}
+						style:--height={cHeight}
+						style:--width={cWidth}
+					/>
+				</Grid>
+				<a class="h-12 text-sm" target="”_blank”" href={currentPainting.sourceUrl}>Open in new tab &#8680;</a>
 			</div>
 		</div>
 
@@ -110,7 +109,7 @@
 				<img
 					class="full-painting absolute top-0 left-0 pointer-events-none opacity-40"
 					class:hidden={!debug_showPaintingOverlay}
-					src="/paintings/{currentPainting.id}_full.jpg"
+					src="../../paintings/{currentPainting.id}_full.jpg"
 					alt={currentPainting.name}
 					style:--height={cHeight}
 					style:--width={cWidth}
@@ -185,7 +184,7 @@
 				<Grid dimensions={currentPainting} multiplier={MULT}>
 					<img
 						class="full-painting pixelated"
-						src="/paintings/{currentPainting.id}_target.png"
+						src="../../paintings/{currentPainting.id}_target.png"
 						alt={currentPainting.name}
 						style:--height={cHeight}
 						style:--width={cWidth}
@@ -193,7 +192,7 @@
 					<img
 						class="full-painting absolute top-0 left-0 opacity-40"
 						class:hidden={!debug_showTargetOverlay}
-						src="/paintings/{currentPainting.id}_full.jpg"
+						src="../../paintings/{currentPainting.id}_full.jpg"
 						alt={currentPainting.name}
 						style:--height={cHeight}
 						style:--width={cWidth}
@@ -217,13 +216,14 @@
 {/if}
 
 <div class="w-full flex flex-col -mt-24">
-	<span class="self-center md:self-end mb4 mr-12 text-white text-lg">Play some painting tunes:</span>
+	<span class="self-center md:self-end mb4 mr-12 text-white text-lg">Play some painting tunes:</span
+	>
 	<div class="flex self-center md:self-end">
-	<button class="mr-2" on:click={nextSong}>Shuffle</button>
-	<audio id="audio" class="w-64" controls src="/audio/song-{tuneNum}.mp3" loop>
-		<a href="/audio/song-{tuneNum}.mp3">background music</a>
-	</audio>
-</div>
+		<button class="mr-2" on:click={nextSong}>Shuffle</button>
+		<audio id="audio" class="w-64" controls src="../../audio/song-{tuneNum}.mp3" loop>
+			<a href="../../audio/song-{tuneNum}.mp3">background music</a>
+		</audio>
+	</div>
 </div>
 
 <style lang="postcss">
@@ -272,5 +272,11 @@
 
 	input:focus-visible + .swatch {
 		@apply outline;
+	}
+
+	@media (min-width: 768px) {
+		.md\:bg-bubble {
+			background-image: url('../../sprites/bubble.png'), url('../../sprites/bug.png');
+		}
 	}
 </style>

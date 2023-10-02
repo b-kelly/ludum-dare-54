@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 	import { paintings } from '$lib/data';
 	import { gameState, type FinishedPainting } from '$lib/gameState';
 	import { getCriticReview } from '$lib/image';
@@ -23,7 +24,7 @@
 </script>
 
 <div class="score-container">
-	<img src="/sprites/bug.png" class="self-end mb-4 ml-4 hidden md:block" alt="bug artiste" />
+	<img src="{base}/sprites/bug.png" class="self-end mb-4 ml-4 hidden md:block" alt="bug artiste" />
 
 	<div class="md:-ml-36">
 		<div class="flex flex-col gap-1 min-w-max max-w-sm">
@@ -51,8 +52,8 @@
 			{#if showSave}
 				<button type="button" class="bg-slate-800" on:click={savePainting}>Save Painting</button>
 			{:else}
-				<a href="/create/paint?painting={painting}">Edit Painting</a>
-				<a href="/view">Return to Museum</a>
+				<a href="{base}/create/paint?painting={painting}">Edit Painting</a>
+				<a href="{base}/view">Return to Museum</a>
 			{/if}
 		</div>
 	</div>
