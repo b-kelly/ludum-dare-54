@@ -19,11 +19,11 @@
 			return gs;
 		});
 
-		goto('/view');
+		goto(base + '/view');
 	}
 </script>
 
-<div class="score-container">
+<div class="score-container" style:--url={`url('${base}/sprites/background-review.png')`}>
 	<img src="{base}/sprites/bug.png" class="self-end mb-4 ml-4 hidden md:block" alt="bug artiste" />
 
 	<div class="md:-ml-36">
@@ -63,6 +63,6 @@
 	.score-container {
 		@apply bg-cover bg-no-repeat
 			flex flex-col md:flex-row gap-8 min-h-screen pt-8 px-4;
-		background-image: url('/sprites/background-review.png');
+		background-image: var(--url);
 	}
 </style>

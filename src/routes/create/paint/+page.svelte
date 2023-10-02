@@ -88,7 +88,9 @@
 						style:--width={cWidth}
 					/>
 				</Grid>
-				<a class="h-12 text-sm" target="”_blank”" href={currentPainting.sourceUrl}>Open in new tab &#8680;</a>
+				<a class="h-12 text-sm" target="”_blank”" href={currentPainting.sourceUrl}
+					>Open in new tab &#8680;</a
+				>
 			</div>
 		</div>
 
@@ -229,13 +231,13 @@
 <style lang="postcss">
 	.create-container {
 		@apply bg-cover flex flex-col md:flex-row select-none w-full min-h-screen;
-		background-image: url('/sprites/background-review.png');
+		background-image: url('../../sprites/background-review.png');
 	}
 
 	.easel {
 		@apply bg-no-repeat bg-bottom
 			flex flex-col gap-2 items-center justify-end pb-16 mb-12;
-		background-image: url('/sprites/easel.png');
+		background-image: url('../../sprites/easel.png');
 	}
 
 	.tray {
