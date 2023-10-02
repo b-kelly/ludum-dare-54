@@ -12,52 +12,52 @@
 		gameOverModalOpen = true;
 		gameOverShownOnce = true;
 	}
-
 </script>
+
 <div class="bg-grass h-screen">
-<div class="museum">
-	<div class="lobby text-2xl px-8">
-		<div>
-			<h2 class="font-headings text-white text-center mt-28">Lobby</h2>
-			<div class="text-center w-100 text-white">Total points: {$gameScore}</div>
+	<div class="museum">
+		<div class="lobby text-2xl px-8">
+			<div>
+				<h2 class="font-headings text-white text-center mt-28">Lobby</h2>
+				<div class="text-center w-100 text-white">Total points: {$gameScore}</div>
+			</div>
+			<span class="mt-16 p-1">&nbsp;</span><!-- TODO HACK -->
+			<button class="" on:click={() => (creditsModalOpen = true)}>Credits</button>
+			<div class="mt-8 w-3/4 self-center text-sm text-white">
+				Play some lobby tunes:
+				<audio class="w-full" controls src="../audio/song-5.mp3" loop>
+					<a href="../audio/song-5.mp3">background music</a>
+				</audio>
+			</div>
+			<button class="mt-28" on:click={() => (helpModalOpen = true)}>Help</button>
 		</div>
-		<span class="mt-16 p-1">&nbsp;</span><!-- TODO HACK -->
-		<button class="" on:click={() => (creditsModalOpen = true)}>Credits</button>
-		<div class="mt-8 w-3/4 self-center text-sm text-white">
-			Play some lobby tunes:
-			<audio class="w-full" controls src="/audio/song-5.mp3" loop>
-				<a href="/audio/song-5.mp3">background music</a>
-			</audio>
-		</div>
-		<button class="mt-28" on:click={() => (helpModalOpen = true)}>Help</button>
+		{#each wings as wing, i}
+			<div class="wing wing-{i + 1}">
+				{#if $gameScore >= wing.unlockReq}
+					<div class="paintings">
+						{#each wing.paintings as painting}
+							{#if $gameState.finishedPaintings[painting]}
+								<a href="../view/painting?painting={painting}" class="painting">
+									<img src={$gameState.finishedPaintings[painting].image} alt={painting} />
+								</a>
+							{:else}
+								<a class="painting" href="../create/select?wing={i}">
+									<span class="placeholder">?</span>
+								</a>
+							{/if}
+						{/each}
+					</div>
+					<h2 class="w-full mt-24 text-center font-headings text-3xl text-white">{wing.name}</h2>
+				{:else}
+					<div class="closed-content">
+						<span class="text-4xl mt-20">Closed</span>
+						<span>Unlocks at {wing.unlockReq} points</span>
+						<h2 class="font-headings text-3xl mt-4">{wing.name}</h2>
+					</div>
+				{/if}
+			</div>
+		{/each}
 	</div>
-	{#each wings as wing, i}
-		<div class="wing wing-{i + 1}">
-			{#if $gameScore >= wing.unlockReq}
-				<div class="paintings">
-					{#each wing.paintings as painting}
-						{#if $gameState.finishedPaintings[painting]}
-							<a href="/view/painting?painting={painting}" class="painting">
-								<img src={$gameState.finishedPaintings[painting].image} alt={painting} />
-							</a>
-						{:else}
-							<a class="painting" href="/create/select?wing={i}">
-								<span class="placeholder">?</span>
-							</a>
-						{/if}
-					{/each}
-				</div>
-				<h2 class="w-full mt-24 text-center font-headings text-3xl text-white">{wing.name}</h2>
-			{:else}
-				<div class="closed-content">
-					<span class="text-4xl mt-20">Closed</span>
-					<span>Unlocks at {wing.unlockReq} points</span>
-					<h2 class="font-headings text-3xl mt-4">{wing.name}</h2>
-				</div>
-			{/if}
-		</div>
-	{/each}
-</div>
 </div>
 
 <Modal bind:open={creditsModalOpen}>
@@ -73,14 +73,18 @@
 	<div slot="title" class="font-headings text-4xl">Help</div>
 	<div slot="body">
 		<p>To view, edit, or create paintings, click on the paintings in each wing.</p>
-		<p>(If you can't see the wings, your screen is too narrow! scroll down or widen your screen!)
+		<p>
+			(If you can't see the wings, your screen is too narrow! scroll down or widen your screen!)
+		</p>
 	</div>
 </Modal>
 
 <Modal bind:open={gameOverModalOpen}>
 	<div slot="title" class="font-headings text-4xl">You did it!</div>
 	<div slot="body">
-		<p>You've successfully completed each of the paintings with a total combined score of {$gameScore}.</p>
+		<p>
+			You've successfully completed each of the paintings with a total combined score of {$gameScore}.
+		</p>
 		<p>If you'd like, you can continue playing to try to raise your score!</p>
 		<p>And please, share your art with us in the comments!</p>
 		<p class="text-2xl mt-8">Thank you so much for playing our game!</p>
