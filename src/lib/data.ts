@@ -175,7 +175,7 @@ export const reviews: Review[] = [
 	},
 	{
 		scoreMax: 79,
-		content: "Really solid reproduction - bugs will flock from all over (the backyard) to see this work!",
+		content: "You were close! Really solid reproduction - bugs will flock from all over (the backyard) to see this work!",
 		critic: 4
 	},
 	{
@@ -185,7 +185,7 @@ export const reviews: Review[] = [
 	},
 	{
 		scoreMax: 100,
-		content: "I've never seen work as beautiful as this. Dare I say... better than the original?!",
+		content: "Wonderful! I've never seen work as beautiful as this. Dare I say... better than the original?!",
 		critic: 6
 	}
 ]
